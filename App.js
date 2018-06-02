@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableWithoutFeedback, Animated, StyleSheet, Image, Text, View, Dimensions } from 'react-native';
+import { Platform, TouchableWithoutFeedback, Animated, StyleSheet, Image, Text, View, Dimensions } from 'react-native';
 import {
   ParallaxSwiper,
   ParallaxSwiperPage
@@ -8,8 +8,10 @@ import { Haptic } from 'expo'
 import Message from './Message'
 import Drawer from 'react-native-bottom-drawer'
 
-const { width, height } = Dimensions.get("window")
-const stories = [
+const
+  { width, height } = Dimensions.get("window"),
+  isDroid = Platform.OS !== 'ios'
+  stories = [
   {messages: [
     {key: 1, from: 'ben', msg: 'YO\nIt\'s Ben'},
     {key: 2, from: 'keith', msg: 'Waddddap!', right: true},
@@ -65,7 +67,7 @@ export default class App extends React.Component {
   openDrawer() {
     this.setState({isDrawerOpen: true, isOnTop: true})
     if (this._drawer) this._drawer.open()
-    Haptic.notification(Haptic.NotificationTypes.Success)
+    if (!isDroid) Haptic.notification(Haptic.NotificationTypes.Success)
   }
 
   closeDrawer() {
@@ -81,8 +83,9 @@ export default class App extends React.Component {
   onScrollEnd(scrollToIndex) {
     if (scrollToIndex === this.state.scrollToIndex) return // guard
     if (this._endTimer) clearTimeout(this._endTimer)
-    this._endTimer = setTimeout(_ => {
-      Haptic.impact(scrollToIndex !== this.state.scrollToIndex ? Haptic.ImpactStyles.Light : Haptic.ImpactStyles.Heavy)
+    if (this._endTimer) clearTimeout(this._endTimer) // cancel
+    this._endTimer = setTimeout(_ => { // yield
+      if (!isDroid) Haptic.impact(scrollToIndex !== this.state.scrollToIndex ? Haptic.ImpactStyles.Light : Haptic.ImpactStyles.Heavy)
       this.setState({scrollToIndex, messages: stories[scrollToIndex].messages })
       Animated.spring(this.state.scale, {
         toValue: 1,
@@ -95,7 +98,7 @@ export default class App extends React.Component {
     if (!this.state.isDrawerOpen) {
       this.openDrawer()
     } else {
-      Haptic.selection()
+      if (!isDroid) Haptic.selection()
       if (this.state.isDrawerOpen && global.scrollDrawerBottom) global.scrollDrawerBottom()
       this.setState({messages: this.state.messages.concat({key: Math.random(), from: 'keith', msg: 'Pressed!  The next piece to this story would be. right. here.', right: true})})
     }
