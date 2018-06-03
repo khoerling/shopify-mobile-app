@@ -8,6 +8,7 @@ import { Haptic } from 'expo'
 import Message from './Message'
 import Drawer from 'react-native-bottom-drawer'
 import PHOTOS from './data'
+import { BlurView } from 'expo'
 
 const
 
@@ -148,7 +149,7 @@ export default class App extends React.Component {
                             />
                           }
                           ForegroundComponent={
-                              <View key={photo.id} style={[styles.foregroundTextContainer]}>
+                              <BlurView intensity={40} key={photo.id} style={[styles.foregroundTextContainer, {opacity: this.state.isDrawerOpen ? 0 : 1}]}>
                                   {this.state.isDrawerOpen
                                     ? null
                                     : <Animated.View style={[this.getPageTransformStyle(ndx)]}>
@@ -197,12 +198,16 @@ const styles = StyleSheet.create({
   },
   foregroundTextContainer: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
     backgroundColor: "transparent",
     position: 'absolute',
-    bottom: 85,
-    left: 20,
+    bottom: 0,
+    paddingBottom: 90,
+    paddingTop: 10,
+    paddingLeft: 25,
+    left: 0,
+    right: 0,
   },
   foregroundText: {
     flex: 1,
@@ -214,8 +219,9 @@ const styles = StyleSheet.create({
     color: "white"
   },
   authorText: {
-    fontSize: 20,
-    marginTop: 8,
+    fontSize: 14,
+    marginTop: 5,
+    fontWeight: "700",
     color: 'rgba(255,255,255,.8)',
   },
   dark: {
