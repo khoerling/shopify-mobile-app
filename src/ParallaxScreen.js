@@ -7,34 +7,20 @@ import {
 import { Haptic } from 'expo'
 import Message from './Message'
 import Drawer from 'react-native-bottom-drawer'
+import PHOTOS from './data'
 
 const
+
   { width, height } = Dimensions.get("window"),
   isDroid = Platform.OS !== 'ios'
-  stories = [
-  {messages: [
-    {key: 1, from: 'ben', msg: 'YO\nIt\'s Ben'},
-    {key: 2, from: 'keith', msg: 'Waddddap!', right: true},
-    {key: 3, from: 'keith', msg: 'Give this demo a spin and let me know your thoughts.  Likely a 2-column screen would exist in our navigation before this one, similar to Hooked, whereby pressing a Story loads this screen with the left/right swipes between Stories.\n\nSwipe up or press on these messages to show the next message, btw...', right: true},
-    {key: 4, from: 'ben', msg: 'ok!!'},
-    ]
-  },
-  {messages: [
-    {key: 1, from: 'keith', msg: 'The man in black fled across the Desert, and the Gunslinger followed.'},
-  ]},
-  {messages: [
-    {key: 1, from: 'keith', msg: 'a 3rd story begins...\n'},
-    {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
-  ]},
-]
 
 export default class App extends React.Component {
   myCustomAnimatedValue = new Animated.Value(0);
   state = {
     scale: new Animated.Value(1),
     isDrawerOpen: false,
-    scrollToIndex: null,
-    messages: stories[0].messages,
+    scrollToIndex: 0,
+    messages: PHOTOS[0].messages,
   }
 
   getPageTransformStyle = index => ({
@@ -64,6 +50,13 @@ export default class App extends React.Component {
     ]
   })
 
+  componentWillMount() {
+    bus.addListener('photoSelected', photo => {
+      const scrollToIndex = PHOTOS.findIndex(p => p.id === photo.id)
+      this.setState({scrollToIndex, messages: PHOTOS[scrollToIndex].messages || []})
+    })
+  }
+
   openDrawer() {
     this.setState({isDrawerOpen: true, isOnTop: true})
     if (this._drawer) this._drawer.open()
@@ -83,15 +76,16 @@ export default class App extends React.Component {
   onScrollEnd(scrollToIndex) {
     if (scrollToIndex === this.state.scrollToIndex) return // guard
     if (this._endTimer) clearTimeout(this._endTimer) // cancel
-    this._endTimer = setTimeout(_ => { // yield
-      if (!isDroid) Haptic.impact(scrollToIndex !== this.state.scrollToIndex ? Haptic.ImpactStyles.Light : Haptic.ImpactStyles.Heavy)
-      this.setState({scrollToIndex, messages: stories[scrollToIndex].messages })
-      Animated.spring(this.state.scale, {
-        toValue: 1,
-        velocity: 1.5,
-        bounciness: .1,
-      }).start()
-    }, 1)
+    this.setState({scrollToIndex, messages: PHOTOS[scrollToIndex].messages || []})
+    Animated.spring(this.state.scale, {
+      toValue: 1,
+      velocity: 1.5,
+      bounciness: .1,
+    }).start()
+    if (!isDroid)
+      this._endTimer =
+        setTimeout(_ =>
+          Haptic.impact(Haptic.ImpactStyles.Light), 5)
   }
   onPress() {
     if (!this.state.isDrawerOpen) {
@@ -114,82 +108,39 @@ export default class App extends React.Component {
             dividerColor="black"
             backgroundColor="black"
             onMomentumScrollEnd={i => this.onScrollEnd(i)}
-            showsHorizontalScrollIndicator={true}
+            showsHorizontalScrollIndicator={false}
             progressBarThickness={0}
             showProgressBar={false}
             scrollToIndex={this.state.scrollToIndex}
             progressBarBackgroundColor="rgba(0,0,0,0.25)"
             progressBarValueBackgroundColor="#000"
           >
-            <ParallaxSwiperPage
-              BackgroundComponent={
-                <Image
-                  style={styles.backgroundImage}
-                  source={{ uri: "https://goo.gl/wtHtxG" }}
-                />
-              }
-              ForegroundComponent={
-                <View style={[styles.foregroundTextContainer]}>
-                    {this.state.isDrawerOpen
-                      ? null
-                      : <Animated.View style={[this.getPageTransformStyle(0)]}>
-                          <TouchableWithoutFeedback onPress={_ => this.openDrawer()}>
-                          <View>
-                              <Text style={[styles.foregroundText, styles.dark]}>STORY ONE</Text>
-                              <Text style={[styles.authorText, styles.dark]}>AUTHOR</Text>
+            {PHOTOS.map((photo, ndx) =>
+              (
+                <ParallaxSwiperPage key={photo.id + 'page'}
+                    BackgroundComponent={
+                        <Image
+                            style={styles.backgroundImage}
+                            source={{ uri: photo.source.uri }}
+                            />
+                          }
+                          ForegroundComponent={
+                              <View key={photo.id} style={[styles.foregroundTextContainer]}>
+                                  {this.state.isDrawerOpen
+                                    ? null
+                                    : <Animated.View style={[this.getPageTransformStyle(ndx)]}>
+                                        <TouchableWithoutFeedback onPress={_ => this.openDrawer()}>
+                                          <View>
+                                            <Text style={[styles.foregroundText, photo.isDark ? styles.dark : null]}>{photo.title.toUpperCase()}</Text>
+                                            <Text style={[styles.authorText, photo.isDark ? styles.dark : null]}>{photo.postedBy.toUpperCase()}</Text>
+                                          </View>
+                                        </TouchableWithoutFeedback>
+                                      </Animated.View>
+                                  }
                             </View>
-                          </TouchableWithoutFeedback>
-                        </Animated.View>
-                    }
-                </View>
-              }
-            />
-            <ParallaxSwiperPage
-              BackgroundComponent={
-                <Image
-                  style={styles.backgroundImage}
-                  source={{ uri: "https://goo.gl/gt4rWa" }}
+                          }
                 />
-              }
-              ForegroundComponent={
-                <View style={styles.foregroundTextContainer}>
-                  {this.state.isDrawerOpen
-                    ? null
-                    : <Animated.View style={[this.getPageTransformStyle(1)]}>
-                        <TouchableWithoutFeedback onPress={_ => this.openDrawer()}>
-                          <View>
-                            <Text style={[styles.foregroundText]}>STORY TWO</Text>
-                            <Text style={[styles.authorText]}>AUTHOR</Text>
-                          </View>
-                        </TouchableWithoutFeedback>
-                      </Animated.View>
-                  }
-                </View>
-              }
-            />
-            <ParallaxSwiperPage
-              BackgroundComponent={
-                <Image
-                  style={styles.backgroundImage}
-                  source={{ uri: "https://goo.gl/KAaVXt" }}
-                />
-              }
-              ForegroundComponent={
-                <View style={styles.foregroundTextContainer}>
-                  {this.state.isDrawerOpen
-                    ? null
-                    : <Animated.View style={[this.getPageTransformStyle(2)]}>
-                        <TouchableWithoutFeedback onPress={_ => this.openDrawer()}>
-                          <View>
-                            <Text style={[styles.foregroundText]}>STORY THREE</Text>
-                            <Text style={[styles.authorText]}>AUTHOR</Text>
-                          </View>
-                        </TouchableWithoutFeedback>
-                      </Animated.View>
-                    }
-                </View>
-              }
-            />
+            ))}
           </ParallaxSwiper>
         </View>
 <Animated.View style={[{transform: [{scale: this.state.scale}]}, this.state.isOnTop ? {...StyleSheet.absoluteFillObject} : {...StyleSheet.absoluteFillObject, top: height - 100}]}>
@@ -201,7 +152,7 @@ export default class App extends React.Component {
             onStartDrag={_ => this.onStartDrag()}
             onStopDrag={_ => this.onStopDrag()}
             headerHeight={80}
-            teaserHeight={80}
+            teaserHeight={70}
             header={'STORIES'}>
             {this.state.messages.map(m => <Message {...m} onPress={_ => this.onPress()}/>)}
           </Drawer>
@@ -232,6 +183,7 @@ const styles = StyleSheet.create({
   foregroundText: {
     flex: 1,
     flexDirection: 'row',
+    marginRight: 25,
     fontSize: 34,
     fontWeight: "700",
     letterSpacing: 0.41,

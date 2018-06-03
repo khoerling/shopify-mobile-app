@@ -85,6 +85,7 @@ export default class PhotoGallery extends React.Component {
         this.setState({ isAnimating: false });
       });
     });
+    bus.emit('photoSelected', photo)
   };
 
   close = photoId => {
