@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform, TouchableWithoutFeedback, Animated, StyleSheet, Image, Text, View, Dimensions } from 'react-native'
+import { StatusBar, Platform, TouchableWithoutFeedback, Animated, StyleSheet, Image, Text, View, Dimensions } from 'react-native'
 import {
   ParallaxSwiper,
   ParallaxSwiperPage
@@ -71,6 +71,7 @@ export default class App extends React.Component {
     this.setState({isDrawerOpen: true, isOnTop: true})
     if (this._drawer) this._drawer.open()
     if (!isDroid) Haptic.notification(Haptic.NotificationTypes.Success)
+    StatusBar.setHidden(true, false) // hide
   }
 
   closeDrawer() {
@@ -84,13 +85,16 @@ export default class App extends React.Component {
         this._close = setTimeout(_ => this._drawer.close()
       )}, 650)
     }
+    StatusBar.setHidden(false, true) // show
   }
 
   onStartDrag() {
     this.setState({isOnTop: true})
+    StatusBar.setHidden(true, true) // hide & show
   }
   onStopDrag() {
     setTimeout(_ => this.setState({isOnTop: this.state.isDrawerOpen ? true : false}), 100)
+    StatusBar.setHidden(!this.state.isDrawerOpen, false) // hide & show
   }
   onScrollEnd(scrollToIndex) {
     if (scrollToIndex === this.state.scrollToIndex) return // guard
