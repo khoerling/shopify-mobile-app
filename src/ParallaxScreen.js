@@ -19,7 +19,7 @@ export default class App extends React.Component {
   state = {
     scale: new Animated.Value(1),
     isDrawerOpen: false,
-    scrollToIndex: 0,
+    scrollToIndex: this.props.scrollToIndex || 0,
     messages: PHOTOS[0].messages,
   }
 

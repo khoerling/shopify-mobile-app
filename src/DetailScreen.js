@@ -10,18 +10,21 @@ import {
   Animated
 } from 'react-native';
 import ParallaxScreen from './ParallaxScreen'
+import PHOTOS from './data'
 
 const maxWidth = Dimensions.get('window').width;
 
 export default class DetailScreen extends React.Component {
   state = {
-    localPhoto: null
+    localPhoto: null,
+    scrollToIndex: 0,
   };
 
   componentWillReceiveProps(nextProps) {
     const { photo } = nextProps;
     if (photo) {
-      this.setState({ localPhoto: photo });
+      const scrollToIndex = PHOTOS.findIndex(p => p.id === photo.id)
+      this.setState({ localPhoto: photo, scrollToIndex });
     }
   }
 
@@ -64,7 +67,7 @@ export default class DetailScreen extends React.Component {
               }
             ]}
           >
-            <ParallaxScreen />
+            <ParallaxScreen scrollToIndex={this.state.scrollToIndex} />
           </Animated.View>
           <Animated.View
             style={{
