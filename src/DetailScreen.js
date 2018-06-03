@@ -76,6 +76,7 @@ export default class DetailScreen extends React.Component {
             pointerEvents={isAnimating ? 'none' : 'auto'}
           >
             <TouchableOpacity
+              hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }}
               onPress={() => onClose(localPhoto.id)}
               style={styles.closeButton}
             >
@@ -101,17 +102,18 @@ const styles = StyleSheet.create({
     fontSize: 14
   },
   body: { flex: 1, },
-  closeText: { color: 'white', backgroundColor: 'transparent' },
+  closeText: { color: '#eee', backgroundColor: 'transparent' },
   closeButton: {
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: 'rgba(0,0,0,0.3)',
     marginTop: 20,
+    marginRight: 3,
     borderWidth: 1,
     borderColor: 'white',
     padding: 10,
     paddingTop: 5,
     paddingBottom: 5,
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(255,255,255,.8)',
+    borderColor: 'rgba(255,255,255,.7)',
     borderRadius: 100
   }
 });
