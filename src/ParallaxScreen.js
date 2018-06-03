@@ -50,7 +50,12 @@ export default class App extends React.Component {
     ]
   })
 
+  componentWillUnmount() {
+    bus.removeEventListener('photoGalleryClosed')
+  }
+
   componentWillMount() {
+    bus.addListener('photoGalleryClosed', _ => this.closeDrawer())
     bus.addListener('photoSelected', photo => {
       const scrollToIndex = PHOTOS.findIndex(p => p.id === photo.id)
       this.setState({scrollToIndex, messages: PHOTOS[scrollToIndex].messages || []})
@@ -65,6 +70,12 @@ export default class App extends React.Component {
 
   closeDrawer() {
     setTimeout(_ => this.setState({isDrawerOpen: false, isOnTop: false}), 100)
+    if (this._close) { // guard
+      clearTimeout(this._close)
+      this._close = null
+    } else {
+      this._close = setTimeout(_ => this._drawer.close(), 101)
+    }
   }
 
   onStartDrag() {
