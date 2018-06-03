@@ -16,7 +16,7 @@ export default [
     messages: [
       {key: 1, from: 'ben', msg: 'YO\nIt\'s Ben'},
       {key: 2, from: 'keith', msg: 'Waddddap!', right: true},
-      {key: 3, from: 'keith', msg: 'Give this demo a spin and let me know your thoughts.  Likely a 2-column screen would exist in our navigation before this one, similar to Hooked, whereby pressing a Story loads this screen with the left/right swipes between Stories.\n\nSwipe up or press on these messages to show the next message, btw...', right: true},
+      {key: 3, from: 'keith', msg: 'Give this demo a spin and let me know your thoughts.  There\'s a few quirks and we\'ll need design.\n\nSwipe up or press on these messages to show the next message, btw...', right: true},
       {key: 4, from: 'ben', msg: 'ok!!'},
     ]
   },
@@ -32,7 +32,11 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'The man in black fled across the Desert, and the Gunslinger followed.'},
+      {key: 1, from: 'king', msg: 'The man in black fled across the Desert, and the Gunslinger followed.'},
+      {key: 2, from: 'king', msg: 'The desert was the apotheosis of all deserts, huge, standing to the sky for what looked like eternity in all directions. '},
+      {key: 3, from: 'king', msg: 'It was white and blinding and waterless and without feature save for the faint, cloudy haze of the mountains which sketched themselves on the horizon and the devil-grass which brought sweet dreams, nightmares, death.'},
+      {key: 4, from: 'king', msg: 'An occasional tombstone sign pointed the way, for once the drifted track that cut its way through the thick crust of alkali had been a highway. Coaches and buckas had followed it.'},
+      {key: 5, from: 'king', msg: 'The world had moved on since then.'},
     ],
   },
   {
@@ -47,7 +51,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'a 3rd story begins...\n'},
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -61,7 +65,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4412/36334926986_e7c6250d16_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '36378437285',
@@ -72,7 +80,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4363/36378437285_6c6e41420d_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '36385293895',
@@ -83,7 +95,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4354/36385293895_5c64635c7e_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '35981101570',
@@ -94,7 +110,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4433/35981101570_2fa50912b7_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '36215026892',
@@ -105,7 +125,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4354/36215026892_e7c25f4d6c_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '36383381605',
@@ -117,7 +141,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4350/36383381605_d5f090aef6_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '36343386706',
@@ -128,7 +156,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4427/36343386706_9621479e9f_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '35582766513',
@@ -139,7 +171,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4390/35582766513_afb89ba6c5_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '35991086210',
@@ -150,7 +186,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4374/35991086210_3e8fc0d383_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '36213975142',
@@ -161,7 +201,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4420/36213975142_d7da2e60e0_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '35986898460',
@@ -172,7 +216,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4380/35986898460_c3aeb83cb5_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '35988948010',
@@ -183,7 +231,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4377/35988948010_9e3752bdb5_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '35545027504',
@@ -194,7 +246,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4332/35545027504_027eb8e2a6_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '35980200700',
@@ -205,7 +261,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4386/35980200700_17e52c4250_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '36387221395',
@@ -216,7 +276,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4356/36387221395_061bb71716_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '35984386640',
@@ -227,7 +291,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4337/35984386640_8bd00cf482_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '35579027583',
@@ -238,7 +306,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4338/35579027583_cc231667a2_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '35545022354',
@@ -249,7 +321,11 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4414/35545022354_7b0a706899_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
   {
     id: '36215239572',
@@ -260,6 +336,10 @@ export default [
     source: {
       uri: 'https://farm5.staticflickr.com/4415/36215239572_90a315c548_z.jpg',
       cache: 'force-cache'
-    }
+    },
+    messages: [
+      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+    ],
   },
 ];

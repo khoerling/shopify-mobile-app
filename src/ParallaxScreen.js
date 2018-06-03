@@ -178,6 +178,7 @@ export default class App extends React.Component {
             teaserHeight={70}
             header={'STORIES'}>
             {this.state.messages.map(m => <Message {...m} onPress={_ => this.onPress()}/>)}
+            <View style={{marginTop: 200}}/>
           </Drawer>
         </Animated.View>
       </View>
