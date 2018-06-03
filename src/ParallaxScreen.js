@@ -81,10 +81,10 @@ export default class App extends React.Component {
       clearTimeout(this._close)
       this._close = null
     } else {
-      setTimeout(_ => {
+      this._close= setTimeout(_ => {
         this.setState({isOnTop: false})
-        this._close = setTimeout(_ => this._drawer.close()
-      )}, 650)
+        this._drawer.close()
+      }, 650)
     }
     StatusBar.setHidden(false, true) // show
   }
@@ -98,18 +98,21 @@ export default class App extends React.Component {
     StatusBar.setHidden(!this.state.isDrawerOpen, false) // hide & show
   }
   onScrollEnd(scrollToIndex) {
+    clearTimeout(this._endTimer)
+    const now = new Date()
+    if (now - this.lastEndTimer < 400) return // guard
     if (scrollToIndex === this.state.scrollToIndex) return // guard
-    if (this._endTimer) clearTimeout(this._endTimer) // cancel
-    this.setState({scrollToIndex, messages: PHOTOS[scrollToIndex].messages || []})
-    Animated.spring(this.state.scale, {
-      toValue: 1,
-      velocity: 1.5,
-      bounciness: .1,
-    }).start()
-    if (!isDroid)
-      this._endTimer =
-        setTimeout(_ =>
-          Haptic.impact(Haptic.ImpactStyles.Light), 5)
+    this._endTimer =
+      setTimeout(_ => {
+        this.setState({scrollToIndex, messages: PHOTOS[scrollToIndex].messages || []})
+        Animated.spring(this.state.scale, {
+          toValue: 1,
+          velocity: 1.5,
+          bounciness: .1,
+        }).start()
+        if (!isDroid) Haptic.impact(Haptic.ImpactStyles.Light)
+        this.lastEndTimer = new Date()
+      }, 5)
   }
   onPress() {
     if (!this.state.isDrawerOpen) {
