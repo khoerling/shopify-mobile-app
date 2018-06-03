@@ -155,13 +155,13 @@ export default class App extends React.Component {
                                     : <Animated.View style={[this.getPageTransformStyle(ndx)]}>
                                         <TouchableWithoutFeedback onPress={_ => this.openDrawer()}>
                                           <View>
-                                            <Text style={[styles.foregroundText, photo.isDark ? styles.dark : null]}>{photo.title.toUpperCase()}</Text>
-                                            <Text style={[styles.authorText, photo.isDark ? styles.dark : null]}>{photo.postedBy.toUpperCase()}</Text>
+                                            <Text style={[styles.foregroundText, photo.theme ? styles[photo.theme] : null]}>{photo.title.toUpperCase()}</Text>
+                                            <Text style={[styles.authorText, photo.theme ? styles[photo.theme] : null]}>{photo.postedBy.toUpperCase()}</Text>
                                           </View>
                                         </TouchableWithoutFeedback>
                                       </Animated.View>
                                   }
-                            </View>
+                            </BlurView>
                           }
                 />
             ))}
@@ -178,7 +178,10 @@ export default class App extends React.Component {
             headerHeight={80}
             teaserHeight={70}
             header={'STORIES'}>
-            {this.state.messages.map(m => <Message {...m} onPress={_ => this.onPress()}/>)}
+            {this.state.messages.map(m =>
+              <Message {...m}
+                theme={PHOTOS[this.state.scrollToIndex].theme}
+                onPress={_ => this.onPress()}/>)}
             <View style={{marginTop: 200}}/>
           </Drawer>
         </Animated.View>

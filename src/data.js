@@ -3,7 +3,7 @@
 export default [
   {
     id: '35577308923',
-    isDark: true,
+    theme: 'dark',
     postedBy: 'Peter Brannon',
     width: 512,
     height: 640,
@@ -58,7 +58,7 @@ export default [
   {
     id: '36334926986',
     postedBy: 'dizbin',
-    isDark: true,
+    theme: 'dark',
     width: 512,
     height: 640,
     title: 'white light',
@@ -134,7 +134,7 @@ export default [
   {
     id: '36383381605',
     postedBy: 'Gerhard R.',
-    isDark: true,
+    theme: 'dark',
     width: 640,
     height: 421,
     title: 'Kreiskunst',
@@ -317,6 +317,7 @@ export default [
     postedBy: 'kirsten',
     width: 640,
     height: 427,
+    theme: 'dark',
     title: 'A Healthy Lomo Blubree [in explore]',
     source: {
       uri: 'https://farm5.staticflickr.com/4414/35545022354_7b0a706899_z.jpg',
