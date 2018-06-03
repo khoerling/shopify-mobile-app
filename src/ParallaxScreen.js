@@ -63,18 +63,26 @@ export default class App extends React.Component {
   }
 
   openDrawer() {
+    if (this._close) {
+      // cancel close
+      clearTimeout(this._close)
+      this._close = null
+    }
     this.setState({isDrawerOpen: true, isOnTop: true})
     if (this._drawer) this._drawer.open()
     if (!isDroid) Haptic.notification(Haptic.NotificationTypes.Success)
   }
 
   closeDrawer() {
-    setTimeout(_ => this.setState({isDrawerOpen: false, isOnTop: false}), 100)
+    this.setState({isDrawerOpen: false})
     if (this._close) { // guard
       clearTimeout(this._close)
       this._close = null
     } else {
-      this._close = setTimeout(_ => this._drawer.close(), 101)
+      setTimeout(_ => {
+        this.setState({isOnTop: false})
+        this._close = setTimeout(_ => this._drawer.close()
+      )}, 650)
     }
   }
 
