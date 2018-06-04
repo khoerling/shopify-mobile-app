@@ -51,7 +51,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -67,7 +67,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -82,7 +82,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -97,7 +97,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -112,7 +112,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -127,7 +127,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -143,7 +143,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -158,7 +158,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -173,7 +173,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -188,7 +188,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -203,7 +203,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -218,7 +218,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -233,7 +233,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -248,7 +248,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -263,7 +263,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -278,7 +278,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -293,7 +293,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -308,7 +308,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -324,7 +324,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
@@ -339,7 +339,7 @@ export default [
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', msg: 'yet-another story begins...\n'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
