@@ -33,7 +33,7 @@ export default class App extends React.Component {
             index * (width + 8),
             (index + 1) * (width + 8)
           ],
-          outputRange: [0, 1, 0],
+          outputRange: [-.7, 1, -.7],
           extrapolate: "clamp"
         })
       },
@@ -155,7 +155,19 @@ export default class App extends React.Component {
                               <BlurView intensity={40} key={photo.id} style={[styles.foregroundTextContainer, {opacity: this.state.isDrawerOpen ? 0 : 1}]}>
                                   {this.state.isDrawerOpen
                                     ? null
-                                    : <Animated.View style={[this.getPageTransformStyle(ndx)]}>
+                                    : <Animated.View style={[this.getPageTransformStyle(ndx),
+
+                                                             {
+                                                               opacity: this.myCustomAnimatedValue.interpolate({
+                                                                 inputRange: [
+                                                                   (ndx - 1) * (width + 8), // Add 8 for dividerWidth
+                                                                   ndx * (width + 8),
+                                                                   (ndx + 1) * (width + 8)
+                                                                 ],
+                                                                 outputRange: [-.7, 1, -.7],
+                                                               }),
+                                                             },
+                                                            ]}>
                                         <TouchableWithoutFeedback onPress={_ => this.openDrawer()}>
                                           <View>
                                             <Text style={[styles.foregroundText, photo.theme ? styles[photo.theme] : null]}>{photo.title.toUpperCase()}</Text>
