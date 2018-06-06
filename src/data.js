@@ -343,4 +343,4 @@ export default [
       {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
-];
+]
