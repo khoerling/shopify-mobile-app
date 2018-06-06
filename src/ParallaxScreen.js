@@ -112,7 +112,7 @@ export default class App extends React.Component {
         }).start()
         if (!isDroid) Haptic.impact(Haptic.ImpactStyles.Light)
         this.lastEndTimer = new Date()
-      }, 5)
+      }, 300)
   }
   onPress() {
     if (!this.state.isDrawerOpen) {
