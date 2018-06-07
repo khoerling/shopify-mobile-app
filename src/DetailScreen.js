@@ -79,7 +79,7 @@ export default class DetailScreen extends React.Component {
             pointerEvents={isAnimating ? 'none' : 'auto'}
           >
             <TouchableOpacity
-              hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }}
+              hitSlop={{ top: 20, left: 20, right: 20, bottom: 20 }}
               onPress={() => onClose(localPhoto.id)}
               style={styles.closeButton}
             >
