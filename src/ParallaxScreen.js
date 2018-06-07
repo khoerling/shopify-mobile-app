@@ -11,7 +11,6 @@ import PHOTOS from './data'
 import { BlurView } from 'expo'
 
 const
-
   { width, height } = Dimensions.get("window"),
   isDroid = Platform.OS !== 'ios'
 
@@ -59,6 +58,7 @@ export default class App extends React.Component {
     bus.addListener('photoGalleryClosed', _ => this.closeDrawer())
     bus.addListener('photoSelected', photo => {
       const scrollToIndex = PHOTOS.findIndex(p => p.id === photo.id)
+      this.lastSelected = new Date()
       this.setState({scrollToIndex, messages: PHOTOS[scrollToIndex].messages || []})
     })
   }
@@ -97,11 +97,15 @@ export default class App extends React.Component {
     setTimeout(_ => this.setState({isOnTop: this.state.isDrawerOpen ? true : false}), 100)
     StatusBar.setHidden(!this.state.isDrawerOpen, false) // hide & show
   }
+
   onScrollEnd(scrollToIndex) {
-    clearTimeout(this._endTimer)
-    const now = new Date()
-    if (now - this.lastEndTimer < 400) return // guard
-    if (scrollToIndex === this.state.scrollToIndex) return // guard
+    if (this._endTimer) clearTimeout(this._endTimer)
+    // guards
+    const
+      now = new Date(),
+      animationDuration = 350
+    if (now - this.lastSelected < animationDuration) return
+    if (scrollToIndex === this.state.scrollToIndex) return
     this._endTimer =
       setTimeout(_ => {
         this.setState({scrollToIndex, messages: PHOTOS[scrollToIndex].messages || []})
@@ -111,8 +115,7 @@ export default class App extends React.Component {
           bounciness: .1,
         }).start()
         if (!isDroid) Haptic.impact(Haptic.ImpactStyles.Light)
-        this.lastEndTimer = new Date()
-      }, 300)
+      }, animationDuration)
   }
   onPress() {
     if (!this.state.isDrawerOpen) {
@@ -129,7 +132,7 @@ export default class App extends React.Component {
       <View style={{flex: 1}}>
         <View>
           <ParallaxSwiper
-            speed={0.4}
+            speed={0.3}
             animatedValue={this.myCustomAnimatedValue}
             dividerWidth={8}
             dividerColor="black"
