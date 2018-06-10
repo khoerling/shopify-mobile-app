@@ -98,14 +98,12 @@ export default class App extends React.Component {
     StatusBar.setHidden(!this.state.isDrawerOpen, false) // hide & show
   }
 
+  onScrollBegin(scrollToIndex) {
+    if (this._endTimer) clearTimeout(this._endTimer)
+  }
   onScrollEnd(scrollToIndex) {
     if (this._endTimer) clearTimeout(this._endTimer)
-    // guards
-    const
-      now = new Date(),
-      animationDuration = 350
-    if (now - this.lastSelected < animationDuration) return
-    if (scrollToIndex === this.state.scrollToIndex) return
+    if (scrollToIndex === this.state.scrollToIndex) return // guard
     this._endTimer =
       setTimeout(_ => {
         this.setState({scrollToIndex, messages: PHOTOS[scrollToIndex].messages || []})
@@ -115,7 +113,7 @@ export default class App extends React.Component {
           bounciness: .1,
         }).start()
         if (!isDroid) Haptic.impact(Haptic.ImpactStyles.Light)
-      }, animationDuration)
+      }, 225)
   }
   onPress() {
     if (!this.state.isDrawerOpen) {
@@ -138,6 +136,7 @@ export default class App extends React.Component {
             dividerColor="black"
             backgroundColor="black"
             onMomentumScrollEnd={i => this.onScrollEnd(i)}
+            onScrollBeginDrag={i => this.onScrollBegin(i)}
             showsHorizontalScrollIndicator={false}
             progressBarThickness={0}
             showProgressBar={false}
