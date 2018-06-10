@@ -1,5 +1,5 @@
 const TARGET_HEIGHT = 355;
-const BORDER_OFFSET = 3;
+const BORDER_OFFSET = 5;
 
 function makeSmaller(image, amount) {
   amount = amount || 1;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   StyleSheet,
   Text,
@@ -8,29 +8,29 @@ import {
   Dimensions,
   TouchableOpacity,
   Animated
-} from 'react-native';
+} from 'react-native'
 import ParallaxScreen from './ParallaxScreen'
 import PHOTOS from './data'
 
-const maxWidth = Dimensions.get('window').width;
+const maxWidth = Dimensions.get('window').width
 
 export default class DetailScreen extends React.Component {
   state = {
     localPhoto: null,
     scrollToIndex: 0,
-  };
+  }
 
   componentWillReceiveProps(nextProps) {
-    const { photo } = nextProps;
+    const { photo } = nextProps
     if (photo) {
       const scrollToIndex = PHOTOS.findIndex(p => p.id === photo.id)
-      this.setState({ localPhoto: photo, scrollToIndex });
+      this.setState({ localPhoto: photo, scrollToIndex })
     }
   }
 
   render() {
-    const { onClose, openProgress, isAnimating } = this.props;
-    const { localPhoto } = this.state;
+    const { onClose, openProgress, isAnimating } = this.props
+    const { localPhoto } = this.state
     if (localPhoto) {
       return (
         <Animated.View
@@ -87,9 +87,9 @@ export default class DetailScreen extends React.Component {
             </TouchableOpacity>
           </Animated.View>
         </Animated.View>
-      );
+      )
     }
-    return <View />;
+    return <View />
   }
 }
 
@@ -98,17 +98,16 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 22,
     fontWeight: '600',
-    lineHeight: 50
   },
   description: {
     color: '#333',
     fontSize: 14
   },
   body: { flex: 1, },
-  closeText: { color: '#eee', backgroundColor: 'transparent' },
+  closeText: { fontSize: 17, fontWeight: 'bold', color: '#eee', backgroundColor: 'transparent' },
   closeButton: {
-    backgroundColor: 'rgba(0,0,0,0.3)',
-    marginTop: 20,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    marginTop: 22,
     marginRight: 3,
     borderWidth: 1,
     borderColor: 'white',
@@ -119,4 +118,4 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,.7)',
     borderRadius: 100
   }
-});
+})

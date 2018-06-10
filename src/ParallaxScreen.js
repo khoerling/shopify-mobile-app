@@ -192,9 +192,10 @@ export default class App extends React.Component {
             onClose={_ => this.closeDrawer()}
             onStartDrag={_ => this.onStartDrag()}
             onStopDrag={_ => this.onStopDrag()}
-            headerHeight={80}
+            headerHeight={90}
             teaserHeight={70}
-            header={'STORIES'}>
+            headerIcon={'md-arrow-back'}
+            header={''}>
             {this.state.messages.map(m =>
               <Message {...m}
                 theme={PHOTOS[this.state.scrollToIndex].theme}
@@ -224,7 +225,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     paddingBottom: 90,
-    paddingTop: 10,
+    paddingTop: 15,
     paddingLeft: 25,
     left: 0,
     right: 0,
@@ -234,6 +235,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginRight: 25,
     fontSize: 34,
+    lineHeight: 32,
     fontWeight: "700",
     letterSpacing: 0.41,
     color: "white"
@@ -242,7 +244,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 5,
     fontWeight: "700",
-    color: 'rgba(255,255,255,.8)',
+    color: 'rgba(255,255,255,.85)',
   },
   dark: {
     color: 'rgba(0,0,0,.8)',
