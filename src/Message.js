@@ -16,10 +16,13 @@ export default class Message extends React.Component {
   render() {
     return (
       <TouchableWithoutFeedback onPress={_ => this.props.onPress()}>
-        <View style={[styles.container, this.props.right ? styles.containerRight : null, this.props.theme ? styles[`${this.props.theme}Container`] : null]}>
-          <Text style={[styles.from, this.props.right ? styles.right : null, this.props.theme ? styles[`${this.props.theme}${this.props.right ? 'Right' : ''}From`] : null, ]}>{this.props.from}</Text>
-          <Text style={[styles.body, this.props.theme ? styles[`${this.props.theme}Body`] : null, this.props.right ? styles.bodyRight : null]}>{this.props.msg}</Text>
-        </View>
+        {this.props.from === 'narration'
+          ? <View><Text style={[styles.narration, this.props.theme ? styles[`${this.props.theme}Narration`] : null]}>{this.props.msg}</Text></View>
+          : <View style={[styles.container, this.props.right ? styles.containerRight : null, this.props.theme ? styles[`${this.props.theme}Container`] : null]}>
+              <Text style={[styles.from, this.props.right ? styles.right : null, this.props.theme ? styles[`${this.props.theme}${this.props.right ? 'Right' : ''}From`] : null, ]}>{this.props.from}</Text>
+                <Text style={[styles.body, this.props.theme ? styles[`${this.props.theme}Body`] : null, this.props.right ? styles.bodyRight : null]}>{this.props.msg}</Text>
+            </View>
+        }
       </TouchableWithoutFeedback>
     )
   }
@@ -36,11 +39,22 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginHorizontal: 7,
   },
+  darkNarration: {
+    color: '#aaa',
+  },
+  narration: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 20,
+    marginBottom: 30,
+    marginHorizontal: 25,
+  },
   bodyRight: {
-    fontSize: 15,
+    fontSize: 17,
   },
   body: {
-    fontSize: 17,
+    fontSize: 19,
     lineHeight: 24,
   },
   darkContainer: {
