@@ -21,22 +21,19 @@ export default [
     ]
   },
   {
-    id: '36390435575',
-    postedBy: 'Dylan Toh',
-    width: 640,
-    height: 427,
-    title: 'Ghost Express',
+    id: '36334926986',
+    postedBy: 'dizbin',
+    theme: 'dark',
+    width: 512,
+    height: 640,
+    title: 'white light',
     source: {
-      // uri: 'https://farm5.staticflickr.com/4374/36390435575_7e51b26c00_z.jpg',
-      uri: 'https://goo.gl/gt4rWa',
+      uri: 'https://farm5.staticflickr.com/4412/36334926986_e7c6250d16_z.jpg',
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'king', msg: 'The man in black fled across the Desert, and the Gunslinger followed.'},
-      {key: 2, from: 'king', msg: 'The desert was the apotheosis of all deserts, huge, standing to the sky for what looked like eternity in all directions. '},
-      {key: 3, from: 'king', msg: 'It was white and blinding and waterless and without feature save for the faint, cloudy haze of the mountains which sketched themselves on the horizon and the devil-grass which brought sweet dreams, nightmares, death.'},
-      {key: 4, from: 'king', msg: 'An occasional tombstone sign pointed the way, for once the drifted track that cut its way through the thick crust of alkali had been a highway. Coaches and buckas had followed it.'},
-      {key: 5, from: 'king', msg: 'The world had moved on since then.'},
+      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
+      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
     ],
   },
   {
@@ -56,19 +53,22 @@ export default [
     ],
   },
   {
-    id: '36334926986',
-    postedBy: 'dizbin',
-    theme: 'dark',
-    width: 512,
-    height: 640,
-    title: 'white light',
+    id: '36390435575',
+    postedBy: 'Dylan Toh',
+    width: 640,
+    height: 427,
+    title: 'Ghost Express',
     source: {
-      uri: 'https://farm5.staticflickr.com/4412/36334926986_e7c6250d16_z.jpg',
+      // uri: 'https://farm5.staticflickr.com/4374/36390435575_7e51b26c00_z.jpg',
+      uri: 'https://goo.gl/gt4rWa',
       cache: 'force-cache'
     },
     messages: [
-      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
-      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
+      {key: 1, from: 'king', msg: 'The man in black fled across the Desert, and the Gunslinger followed.'},
+      {key: 2, from: 'king', msg: 'The desert was the apotheosis of all deserts, huge, standing to the sky for what looked like eternity in all directions. '},
+      {key: 3, from: 'king', msg: 'It was white and blinding and waterless and without feature save for the faint, cloudy haze of the mountains which sketched themselves on the horizon and the devil-grass which brought sweet dreams, nightmares, death.'},
+      {key: 4, from: 'king', msg: 'An occasional tombstone sign pointed the way, for once the drifted track that cut its way through the thick crust of alkali had been a highway. Coaches and buckas had followed it.'},
+      {key: 5, from: 'king', msg: 'The world had moved on since then.'},
     ],
   },
   {
@@ -245,21 +245,6 @@ export default [
     title: 'CLEOPATRA ( Explore 06.08.2017 )',
     source: {
       uri: 'https://farm5.staticflickr.com/4332/35545027504_027eb8e2a6_z.jpg',
-      cache: 'force-cache'
-    },
-    messages: [
-      {key: 1, from: 'keith', right: true, msg: 'yet-another story begins...\n'},
-      {key: 2, from: 'ben', msg: 'test, test, test, test, test, test, test, test, test, test, test, test...'},
-    ],
-  },
-  {
-    id: '35980200700',
-    postedBy: 'Sam Brockway',
-    width: 427,
-    height: 640,
-    title: 'island on the lake',
-    source: {
-      uri: 'https://farm5.staticflickr.com/4386/35980200700_17e52c4250_z.jpg',
       cache: 'force-cache'
     },
     messages: [

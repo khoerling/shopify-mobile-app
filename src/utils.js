@@ -1,11 +1,11 @@
-const TARGET_HEIGHT = 200;
-const BORDER_OFFSET = 5;
+const TARGET_HEIGHT = 355;
+const BORDER_OFFSET = 3;
 
 function makeSmaller(image, amount) {
   amount = amount || 1;
   const newHeight = image.height - amount;
-  image.width = image.width * (newHeight / image.height);
-  image.height = newHeight;
+  image.height = image.width * (newHeight / image.height);
+  image.width = newHeight;
 
   return image;
 }
@@ -35,8 +35,8 @@ function fitImagesInRow(images, maxWidth) {
 export function processImages(photos) {
   return photos.map(photo => {
     const aspectRatio = photo.width / photo.height;
-    photo.width = TARGET_HEIGHT * aspectRatio;
-    photo.height = TARGET_HEIGHT;
+    photo.width = TARGET_HEIGHT;
+    photo.height = TARGET_HEIGHT * aspectRatio;
     return photo;
   });
 }
