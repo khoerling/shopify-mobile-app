@@ -27,7 +27,7 @@ process.argv.forEach((val, index, array) => {
         messages.push({
           key,
           from: lastPerson,
-          msg: lastMsg,
+          msg: lastMsg.replace(/’/g, "'"),
           right: lastPerson !== firstPerson,
         })
         lastPerson = ''
