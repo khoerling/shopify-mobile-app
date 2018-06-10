@@ -69,22 +69,8 @@ export default class PhotoGallery extends React.Component {
 
   open = photo => {
     if (!isDroid) Haptic.selection()
-    this._imageOpacitySetters[photo.id](
-      this.state.openProgress.interpolate({
-        inputRange: [0.005, 0.01],
-        outputRange: [1, 0]
-      })
-    )
-    this.setState({ photo, isAnimating: true }, () => {
-      Animated.timing(this.state.openProgress, {
-        toValue: 1,
-        duration: 125,
-        easing: Easing.easeOutExpo,
-        useNativeDriver: true
-      }).start(() => {
-        this.setState({ isAnimating: false })
-      })
-    })
+    this.setState({ photo, isAnimating: false })
+    this.state.openProgress.setValue(1) // immediately open
     bus.emit('photoSelected', photo)
   }
 

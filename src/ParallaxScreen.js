@@ -113,7 +113,7 @@ export default class App extends React.Component {
           bounciness: .1,
         }).start()
         if (!isDroid) Haptic.impact(Haptic.ImpactStyles.Light)
-      }, 225)
+      }, 351)
   }
   onPress() {
     if (!this.state.isDrawerOpen) {
