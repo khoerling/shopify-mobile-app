@@ -24,7 +24,7 @@ const Item = ({ item, onPhotoOpen }) =>
 const styles = StyleSheet.create({
   h1: {
     fontSize: 25,
-    lineHeight: 23,
+    lineHeight: 24,
     letterSpacing: -1,
     color: '#fff',
     fontWeight: 'bold',
