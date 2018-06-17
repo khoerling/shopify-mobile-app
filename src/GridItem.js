@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo'
 
 const Item = ({ item, onPhotoOpen }) =>
   <TouchableWithoutFeedback onPress={() => onPhotoOpen(item)}>
-    <View>
+    <View style={{paddingBottom: 20}}>
       <PhotoGallery.Photo
         photo={item}
         style={{
@@ -13,7 +13,7 @@ const Item = ({ item, onPhotoOpen }) =>
           height: item.height
         }}
       />
-      <LinearGradient colors={['transparent', 'rgba(0,0,0,.3)', 'rgba(0,0,0,.6)']} style={styles.gradient}>
+      <LinearGradient colors={['transparent', 'rgba(0,0,0,.3)', 'rgba(0,0,0,.9)', 'rgba(0,0,0,.99)']} style={styles.gradient}>
         <Text style={styles.h1}>{item.title}</Text>
         <Text style={styles.h2}>{item.genre.toUpperCase()}</Text>
       </LinearGradient>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     position: 'absolute',
     backgroundColor: 'transparent',
-    paddingTop: 30,
+    paddingTop: 150,
     paddingLeft: 10,
     bottom: 0,
     left: 0,
