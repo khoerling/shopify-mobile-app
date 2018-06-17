@@ -50,10 +50,11 @@ export default class App extends React.Component {
   })
 
   story = _ => data[this.state.scrollToIndex]
+  saveMessageIndex = _ => set(`msgs:${this.state.scrollToIndex}`, this.state.messageIndex)
 
   componentWillUnmount() {
-    bus.removeEventListener('photoGalleryClosed')                    // cleanup
-    set(`msgs:${this.state.scrollToIndex}`, this.state.messageIndex) // save
+    bus.removeEventListener('photoGalleryClosed') // cleanup
+    this.saveMessageIndex()
   }
 
   async componentWillMount() {
@@ -65,7 +66,7 @@ export default class App extends React.Component {
       })
     })
     // restore read-point
-    this.setState({messageIndex: await get(`msgs:${this.state.scrollToIndex}`) || 0})
+    this.setState({messageIndex: await get(`msgs:${this.state.scrollToIndex}`) || 1})
   }
 
   openDrawer() {
@@ -78,6 +79,7 @@ export default class App extends React.Component {
     if (this._drawer) this._drawer.open()
     if (!isDroid) Haptic.notification(Haptic.NotificationTypes.Success)
     StatusBar.setHidden(true, false) // hide
+    global.scrollDrawerBottom()
   }
 
   closeDrawer() {
@@ -101,6 +103,7 @@ export default class App extends React.Component {
   onStopDrag() {
     setTimeout(_ => this.setState({isOnTop: this.state.isDrawerOpen ? true : false}), 100)
     StatusBar.setHidden(!this.state.isDrawerOpen, false) // hide & show
+    global.scrollDrawerBottom()
   }
 
   onScrollBegin(scrollToIndex) {
@@ -122,13 +125,13 @@ export default class App extends React.Component {
       }, 351)
   }
   onPress() {
-    cw('on press msg')
     if (!this.state.isDrawerOpen) {
       this.openDrawer()
     } else {
       if (!isDroid) Haptic.selection()
-      if (this.state.isDrawerOpen && global.scrollDrawerBottom) global.scrollDrawerBottom()
-      // this.setState({messages: this.state.messages.concat({key: Math.random(), from: 'keith', msg: 'Pressed!  The next piece to this story would be. right. here.', right: true})})
+      if (this.state.isDrawerOpen) global.scrollDrawerBottom()
+      this.setState({messageIndex: this.state.messageIndex + 1})
+      this.saveMessageIndex()
     }
   }
 
@@ -202,7 +205,7 @@ export default class App extends React.Component {
             headerHeight={90}
             teaserHeight={70}
             headerIcon={'md-arrow-back'}
-            data={this.story().messages}
+            data={this.story().messages.slice(0, this.state.messageIndex)}
             renderItem={
               ({item, separators}) => <Message
                 item={item}
