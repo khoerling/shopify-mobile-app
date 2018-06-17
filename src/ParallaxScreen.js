@@ -204,19 +204,15 @@ export default class App extends React.Component {
             onStopDrag={_ => this.onStopDrag()}
             headerHeight={90}
             teaserHeight={70}
+            itemHeight={130}
             headerIcon={'md-arrow-back'}
-            data={this.story().messages.slice(0, this.state.messageIndex)}
+            data={this.story().messages.slice(0, this.state.messageIndex).concat({from: 'narration'})}
             renderItem={
               ({item, separators}) => <Message
                 item={item}
                 theme={this.story().theme}
                 onPress={_ => this.onPress()}/>}
                 header={''} />
-          <TouchableWithoutFeedback style={{backgroundColor: 'red', height: 200, width: 300}}>
-            <View>
-              <Text>OY</Text>
-            </View>
-          </TouchableWithoutFeedback>
         </Animated.View>
       </View>
     )

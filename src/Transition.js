@@ -104,8 +104,8 @@ export default class Transition extends React.Component {
             left: destRightDimension.pageX,
             top: destRightDimension.pageY,
             opacity: openProgress.interpolate({
-              inputRange: [0, 0.005, 0.995, 1],
-              outputRange: [0, 1, 1, 0]
+              inputRange: [0, 0.005, 0.895, 1],
+              outputRange: [0, .5, .6, 0]
             }),
             transform: [
               {
