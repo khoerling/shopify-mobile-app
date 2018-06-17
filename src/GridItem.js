@@ -15,7 +15,7 @@ const Item = ({ item, onPhotoOpen }) =>
       />
       <LinearGradient colors={['transparent', 'rgba(0,0,0,.3)', 'rgba(0,0,0,.6)']} style={styles.gradient}>
         <Text style={styles.h1}>{item.title}</Text>
-        <Text style={styles.h2}>{item.postedBy.toUpperCase()}</Text>
+        <Text style={styles.h2}>{item.genre.toUpperCase()}</Text>
       </LinearGradient>
     </View>
   </TouchableWithoutFeedback>

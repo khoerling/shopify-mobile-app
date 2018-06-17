@@ -3,6 +3,7 @@ export default [
     id: '35577308923',
     theme: 'dark',
     postedBy: 'Kordo Doski',
+    genre: 'Comedy',
     width: 512,
     height: 640,
     title: 'The Great Burning Man Acid Debacle of 2021',
@@ -17,6 +18,7 @@ export default [
   {
     id: '36334926986',
     postedBy: 'dizbin',
+    genre: 'Comedy',
     theme: 'dark',
     width: 512,
     height: 640,
@@ -33,6 +35,7 @@ export default [
   {
     id: '36221070302',
     postedBy: 'Wim Boon',
+    genre: 'Comedy',
     width: 640,
     height: 380,
     title: 'Heideblauwtje - Silver-studded blue',
@@ -49,6 +52,7 @@ export default [
   {
     id: '36390435575',
     postedBy: 'Dylan Toh',
+    genre: 'Comedy',
     width: 640,
     height: 427,
     title: 'Ghost Express',
@@ -68,6 +72,7 @@ export default [
   {
     id: '36378437285',
     postedBy: 'Willa Wei',
+    genre: 'Comedy',
     width: 640,
     height: 427,
     title: 'Bountiful Glory',
@@ -83,6 +88,7 @@ export default [
   {
     id: '36385293895',
     postedBy: 'Manfred Hartmann',
+    genre: 'Comedy',
     width: 640,
     height: 360,
     title: 'clouds',
@@ -98,6 +104,7 @@ export default [
   {
     id: '35981101570',
     postedBy: 'Eric Isley',
+    genre: 'Comedy',
     width: 640,
     height: 426,
     title: 'Eastern Ringtail',
@@ -113,6 +120,7 @@ export default [
   {
     id: '36215026892',
     postedBy: 'marcel bakker',
+    genre: 'Comedy',
     width: 640,
     height: 480,
     title: 'Fear of heights?',
@@ -128,6 +136,7 @@ export default [
   {
     id: '36383381605',
     postedBy: 'Gerhard R.',
+    genre: 'Comedy',
     theme: 'dark',
     width: 640,
     height: 421,
@@ -144,6 +153,7 @@ export default [
   {
     id: '36343386706',
     postedBy: 'Claire Gentile',
+    genre: 'Comedy',
     width: 640,
     height: 323,
     title: 'The Norton Sound',
@@ -159,6 +169,7 @@ export default [
   {
     id: '35582766513',
     postedBy: 'James  Crozier',
+    genre: 'Comedy',
     width: 640,
     height: 379,
     title: 'The Power Of An Osprey ... Explore 5-8-2017 # 14',
@@ -174,6 +185,7 @@ export default [
   {
     id: '35991086210',
     postedBy: 'Just me, Aline',
+    genre: 'Comedy',
     width: 640,
     height: 427,
     title: 'as midnight goes by at the Lofoten',
@@ -189,6 +201,7 @@ export default [
   {
     id: '36213975142',
     postedBy: 'John Appleton',
+    genre: 'Comedy',
     width: 640,
     height: 427,
     title: 'Dragon Fruit',
@@ -204,6 +217,7 @@ export default [
   {
     id: '35986898460',
     postedBy: 'sweetgrass1984',
+    genre: 'Comedy',
     width: 640,
     height: 427,
     title: 'Bouquet of wild flowers',
@@ -219,6 +233,7 @@ export default [
   {
     id: '35988948010',
     postedBy: 'Maarten Takens',
+    genre: 'Comedy',
     width: 640,
     height: 427,
     title: 'Posbank bloei van 3 jaar geleden',
@@ -234,6 +249,7 @@ export default [
   {
     id: '35545027504',
     postedBy: 'Tony Cox',
+    genre: 'Comedy',
     width: 640,
     height: 427,
     title: 'CLEOPATRA ( Explore 06.08.2017 )',
@@ -249,6 +265,7 @@ export default [
   {
     id: '36387221395',
     postedBy: 'Marcus Rodriguez',
+    genre: 'Comedy',
     width: 640,
     height: 427,
     title: 'Last of the Summer Cherries.',
@@ -264,6 +281,7 @@ export default [
   {
     id: '35984386640',
     postedBy: 'Doug',
+    genre: 'Comedy',
     width: 640,
     height: 480,
     title: 'Storm Warning',
@@ -279,6 +297,7 @@ export default [
   {
     id: '35579027583',
     postedBy: 'Khurram Khan...',
+    genre: 'Comedy',
     width: 640,
     height: 427,
     title: 'Spots and shade',
@@ -294,6 +313,7 @@ export default [
   {
     id: '35545022354',
     postedBy: 'kirsten',
+    genre: 'Comedy',
     width: 640,
     height: 427,
     theme: 'dark',
@@ -310,6 +330,7 @@ export default [
   {
     id: '36215239572',
     postedBy: 'INNES',
+    genre: 'Comedy',
     width: 640,
     height: 427,
     title: 'Layer cake',
