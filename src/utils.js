@@ -2,7 +2,7 @@ import {
   Dimensions,
 } from 'react-native'
 
-const TARGET_HEIGHT = 400
+const TARGET_HEIGHT = 350
 const BORDER_OFFSET = 5
 const MAX_WIDTH = Dimensions.get('window').width
 

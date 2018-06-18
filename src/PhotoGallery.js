@@ -1,10 +1,10 @@
 import React from 'react'
 import { Platform, Easing, View, Animated } from 'react-native'
-import Transition from './Transition'
-import DetailScreen from './DetailScreen'
-
 import { Haptic } from 'expo'
 import PropTypes from 'prop-types'
+
+import Transition from './Transition'
+import DetailScreen from './DetailScreen'
 
 const isDroid = Platform.OS !== 'ios'
 
@@ -58,6 +58,11 @@ export default class PhotoGallery extends React.Component {
     onImageRef: PropTypes.func
   }
 
+  componentWillMount() {
+    bus.addListener('storySelected', photo => {
+      this.setState({photo})
+    })
+  }
   getChildContext() {
     return { onImageRef: this._onImageRef }
   }

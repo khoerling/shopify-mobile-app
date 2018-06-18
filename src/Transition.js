@@ -97,7 +97,7 @@ export default class Transition extends React.Component {
         <Animated.Image
           source={photo.source}
           style={{
-            backgroundColor: 'green',
+            backgroundColor: 'transparent',
             position: 'absolute',
             width: destRightDimension.width,
             height: destRightDimension.height,

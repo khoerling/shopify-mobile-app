@@ -116,6 +116,7 @@ export default class App extends React.Component {
       setTimeout(_ => {
         // update index and bounce bottom-drawer teaser in
         this.setState({scrollToIndex})
+        bus.emit('storySelected', this.story()) // photo is the full story
         Animated.spring(this.state.scale, {
           toValue: 1,
           velocity: 1.5,
