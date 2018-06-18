@@ -32,6 +32,7 @@ export default class Transition extends React.Component {
 
     if (photo) {
       const sourceImageRef = sourceImageRefs[photo.id];
+      if (!sourceImageRef || !sourceImageRef.getNode()) return // guard
       sourceImageRef
         .getNode()
         .measure((soruceX, soruceY, width, height, pageX, pageY) => {
