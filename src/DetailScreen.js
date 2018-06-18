@@ -83,7 +83,9 @@ export default class DetailScreen extends React.Component {
               onPress={() => onClose(localPhoto.id)}
               style={styles.closeButton}
             >
-              <Text style={styles.closeText}>X</Text>
+              <View>
+                <Text style={styles.closeText}>X</Text>
+              </View>
             </TouchableOpacity>
           </Animated.View>
         </Animated.View>
