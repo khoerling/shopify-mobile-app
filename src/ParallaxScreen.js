@@ -31,7 +31,7 @@ export default class App extends React.Component {
             index * (width + 8),
             (index + 1) * (width + 8)
           ],
-          outputRange: [-.7, 1, -.7],
+          outputRange: [-.8, 1, -.8],
           extrapolate: "clamp"
         })
       },
@@ -42,7 +42,7 @@ export default class App extends React.Component {
             index * (width + 8),
             (index + 1) * (width + 8)
           ],
-          outputRange: ["180deg", "0deg", "-180deg"],
+          outputRange: ["80deg", "0deg", "-80deg"],
           extrapolate: "clamp"
         })
       }
@@ -175,7 +175,7 @@ export default class App extends React.Component {
                                   ndx * (width + 8),
                                   (ndx + 1) * (width + 8)
                                 ],
-                                outputRange: [-.7, 1, -.7],
+                                outputRange: [-2, 1, -2],
                               }),
                             },
                           ]}>
