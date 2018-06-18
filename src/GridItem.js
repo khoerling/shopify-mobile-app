@@ -16,7 +16,7 @@ const Item = class Item extends React.Component {
       // build-in titles
       Animated.timing(this.state.opacity, {
         toValue: 1,
-        duration: 800,
+        duration: 700,
         easing: Easing.easeOutExpo,
         useNativeDriver: true
       }).start()

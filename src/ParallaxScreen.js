@@ -93,6 +93,7 @@ export default class App extends React.Component {
         this._drawer.close()
       }, 650)
     }
+    setTimeout(_ => global.scrollDrawerTop(), 400)
     StatusBar.setHidden(false, true) // show
   }
 
@@ -103,7 +104,7 @@ export default class App extends React.Component {
   onStopDrag() {
     setTimeout(_ => this.setState({isOnTop: this.state.isDrawerOpen ? true : false}), 100)
     StatusBar.setHidden(!this.state.isDrawerOpen, false) // hide & show
-    global.scrollDrawerBottom()
+    setTimeout(_ => global.scrollDrawerBottom({animated: true}), 200)
   }
 
   onScrollBegin(scrollToIndex) {
@@ -130,7 +131,7 @@ export default class App extends React.Component {
       this.openDrawer()
     } else {
       if (!isDroid) Haptic.selection()
-      if (this.state.isDrawerOpen) global.scrollDrawerBottom()
+      if (this.state.isDrawerOpen) setTimeout(_ => global.scrollDrawerBottom({animated: true}), 150)
       this.setState({messageIndex: this.state.messageIndex + 1})
       this.saveMessageIndex()
     }
