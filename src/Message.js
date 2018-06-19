@@ -28,16 +28,17 @@ export default class Message extends React.Component {
             </View>
           : <View style={[
               styles.container,
+              this.props.item.adjacent ? styles.adjacent : null,
               this.props.item.right ? styles.containerRight : null,
               this.props.theme ? styles[`${this.props.theme}Container`] : null]}>
-              <Text
+              {this.props.item.adjacent ? null : <Text
                 selectable={true}
                 style={[
                   styles.from,
                   this.props.item.right ? styles.right : null,
                   this.props.theme ? styles[`${this.props.theme}${this.props.item.right ? 'Right' : ''}From`] : null, ]}>
                   {this.props.item.from}
-              </Text>
+              </Text>}
               <Text
                 selectable={true}
                 style={[
@@ -62,8 +63,11 @@ const styles = StyleSheet.create({
     height: 120,
     alignItems: 'flex-start',
     justifyContent: 'center',
-    marginBottom: 10,
+    marginTop: 10,
     marginHorizontal: 7,
+  },
+  adjacent: {
+    marginTop: 2,
   },
   darkNarration: {
     color: '#aaa',

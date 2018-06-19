@@ -7,9 +7,10 @@ const
 
 var
   done = true,
-  firstPerson = '',
-  lastPerson = '',
-  lastMsg = '',
+  firstFrom = '',
+  lastFrom = null,
+  from = '',
+  msg = '',
   key = 1
 
 process.argv.forEach((val, index, array) => {
@@ -19,32 +20,37 @@ process.argv.forEach((val, index, array) => {
       input: fs.createReadStream(val)
     })
     rl.on('line', (line) => {
-      line = line.replace(/ \(CONT’D\)/, '')
+      const
+        cont     = / \(CONT’D\)/,
+        adjacent = lastFrom === from
+      line = line.replace(cont, '')
       if (line.match(/^$/)) {
         // @ new line, so-- push msg
         done = true
         key = key + 1
         messages.push({
           key,
-          from: lastPerson,
-          msg: lastMsg.replace(/’/g, "'"),
-          right: lastPerson !== firstPerson,
+          adjacent,
+          from,
+          msg: msg.replace(/’/g, "'"),
+          right: from !== firstFrom,
         })
-        lastPerson = ''
+        lastFrom = from
+        from = ''
       } else if (done && line.match(/^([A-Z0-9_\-]+$)/)) {
         // @ name
-        if (firstPerson === '') firstPerson = line // set first
-        lastPerson = line
+        if (firstFrom === '') firstFrom = line // set first
+        from = line
         done = false
       } else {
         // set msg
-        if (done && lastPerson === '') {
+        if (done && from === '') {
           // @ narration
-          lastPerson = 'narration'
-          lastMsg = line
+          from = 'narration'
+          msg = line
         } else {
           // @ msg
-          lastMsg = line
+          msg = line
         }
         done = false
       }

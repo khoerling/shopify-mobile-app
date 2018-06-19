@@ -205,7 +205,7 @@ export default class App extends React.Component {
             onStartDrag={_ => this.onStartDrag()}
             onStopDrag={_ => this.onStopDrag()}
             headerHeight={90}
-            teaserHeight={70}
+            teaserHeight={85}
             itemHeight={130}
             headerIcon={'md-arrow-back'}
             data={this.story().messages.slice(0, this.state.messageIndex).concat({from: 'narration'})}
