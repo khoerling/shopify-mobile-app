@@ -208,7 +208,10 @@ export default class App extends React.Component {
             teaserHeight={85}
             itemHeight={130}
             headerIcon={'md-arrow-back'}
-            data={this.story().messages.slice(0, this.state.messageIndex).concat({from: 'narration'})}
+            data={this.story().messages.slice(0, this.state.messageIndex)
+              .concat({from: 'narration'})
+              .concat({from: 'narration'})
+            }
             renderItem={
               ({item, separators}) => <Message
                 item={item}

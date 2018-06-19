@@ -17,7 +17,7 @@ export default class Message extends React.Component {
     return (
       <TouchableWithoutFeedback onPress={_ => this.props.onPress()}>
         {this.props.item.from === 'narration'
-          ? <View style={[{flex: 1, justifyContent: 'center', height: 130}]}>
+          ? <View style={[{flex: 1, justifyContent: 'center'}]}>
               <Text
                 selectable={true}
                 style={[
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'rgba(255,255,255,.94)',
     padding: 10,
-    height: 120,
     alignItems: 'flex-start',
     justifyContent: 'center',
     marginTop: 10,
