@@ -14,12 +14,14 @@ const Item = class Item extends React.Component {
     })
     bus.addListener('photoGalleryClosed', photoId => {
       // build-in titles
-      Animated.timing(this.state.opacity, {
-        toValue: 1,
-        duration: 700,
-        easing: Easing.easeOutExpo,
-        useNativeDriver: true
-      }).start()
+      setTimeout(_ => {
+        Animated.timing(this.state.opacity, {
+          toValue: 1,
+          duration: 450,
+          easing: Easing.easeOutExpo,
+          useNativeDriver: true
+        }).start()
+      }, 300)
     })
   }
 
