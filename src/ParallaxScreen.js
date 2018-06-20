@@ -59,14 +59,14 @@ export default class App extends React.Component {
 
   async componentWillMount() {
     bus.addListener('photoGalleryClosed', _ => this.closeDrawer())
-    bus.addListener('storySelected', story => {
+    bus.addListener('storySelected', async story => {
       const scrollToIndex = data.findIndex(d => d.id === story.id)
       this.setState({
         scrollToIndex,
       })
+      // restore read-point
+      this.setState({messageIndex: await get(`msgs:${this.state.scrollToIndex}`) || 1})
     })
-    // restore read-point
-    this.setState({messageIndex: await get(`msgs:${this.state.scrollToIndex}`) || 1})
   }
 
   openDrawer() {
