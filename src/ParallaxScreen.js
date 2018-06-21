@@ -62,10 +62,10 @@ export default class App extends React.Component {
     bus.addListener('storySelected', async story => {
       const scrollToIndex = data.findIndex(d => d.id === story.id)
       this.setState({
+        // restore read-point & index
         scrollToIndex,
+        messageIndex: await get(`msgs:${this.state.scrollToIndex}`) || 1,
       })
-      // restore read-point
-      this.setState({messageIndex: await get(`msgs:${this.state.scrollToIndex}`) || 1})
     })
   }
 
@@ -93,7 +93,6 @@ export default class App extends React.Component {
         this._drawer.close()
       }, 650)
     }
-    setTimeout(_ => global.scrollDrawerTop(), 400)
     StatusBar.setHidden(false, true) // show
   }
 
@@ -112,19 +111,19 @@ export default class App extends React.Component {
   }
   onScrollEnd(scrollToIndex) {
     if (this._endTimer) clearTimeout(this._endTimer)
-    if (scrollToIndex === this.state.scrollToIndex) return // guard
+    if (scrollToIndex === this.state.scrollToIndex) return false
     this._endTimer =
       setTimeout(_ => {
         // update index and bounce bottom-drawer teaser in
         this.setState({scrollToIndex})
-        bus.emit('storySelected', this.story()) // photo is the full story
+        bus.emit('storySelected', this.story())
         Animated.spring(this.state.scale, {
           toValue: 1,
           velocity: 1.5,
           bounciness: .1,
         }).start()
         if (!isDroid) Haptic.impact(Haptic.ImpactStyles.Light)
-      }, 351)
+      }, 150)
   }
   onPress() {
     if (!this.state.isDrawerOpen) {
