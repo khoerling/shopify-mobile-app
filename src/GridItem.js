@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     paddingRight: 5,
   },
   h2: {
-    fontSize: 15,
+    fontSize: 13,
     lineHeight: 15,
     color: '#fff',
     opacity: .9,

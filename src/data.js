@@ -51,7 +51,7 @@ export default [
   {
     id: '36378437285',
     postedBy: 'Willa Wei',
-    genre: 'Political Horror/ Suspense',
+    genre: 'Political Horror / Suspense',
     width: 640,
     height: 427,
     title: 'The Gala',
