@@ -51,6 +51,7 @@ export default class App extends React.Component {
 
   story = _ => data[this.state.scrollToIndex]
   saveMessageIndex = _ => set(`msgs:${this.state.scrollToIndex}`, this.state.messageIndex)
+  messageIndex = async scrollToIndex => (await get(`msgs:${scrollToIndex || this.state.scrollToIndex}`)) || 1
 
   componentWillUnmount() {
     bus.removeEventListener('photoGalleryClosed') // cleanup
@@ -64,7 +65,7 @@ export default class App extends React.Component {
       this.setState({
         // restore read-point & index
         scrollToIndex,
-        messageIndex: await get(`msgs:${this.state.scrollToIndex}`) || 1,
+        messageIndex: await this.messageIndex(scrollToIndex)
       })
     })
   }
@@ -125,14 +126,13 @@ export default class App extends React.Component {
         if (!isDroid) Haptic.impact(Haptic.ImpactStyles.Light)
       }, 150)
   }
-  onPress() {
+  async onPress() {
     if (!this.state.isDrawerOpen) {
       this.openDrawer()
     } else {
       if (!isDroid) Haptic.selection()
       if (this.state.isDrawerOpen) setTimeout(_ => global.scrollDrawerBottom({animated: true}), 150)
-      this.setState({messageIndex: this.state.messageIndex + 1})
-      this.saveMessageIndex()
+      this.setState({messageIndex: await this.messageIndex()}, this.saveMessageIndex)
     }
   }
 
