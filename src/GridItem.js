@@ -37,7 +37,7 @@ const Item = class Item extends React.Component {
           }}
         />
         <Animated.View style={[styles.container, {opacity: this.state.opacity}]}>
-          <LinearGradient colors={['transparent', 'rgba(0,0,0,.3)', 'rgba(0,0,0,.9)', 'rgba(0,0,0,.99)']} style={styles.gradient}>
+          <LinearGradient colors={['transparent', 'rgba(0,0,0,.2)', 'rgba(0,0,0,.7)', 'rgba(0,0,0,.99)']} style={styles.gradient}>
             <View>
               <Text style={styles.h1}>{item.title}</Text>
               <Text style={styles.h2}>{item.genre.toUpperCase()}</Text>
