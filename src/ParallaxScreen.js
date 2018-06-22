@@ -132,7 +132,7 @@ export default class App extends React.Component {
     } else {
       if (!isDroid) Haptic.selection()
       if (this.state.isDrawerOpen) setTimeout(_ => global.scrollDrawerBottom({animated: true}), 150)
-      this.setState({messageIndex: await this.messageIndex()}, this.saveMessageIndex)
+      this.setState({messageIndex: this.state.messageIndex + 1}, this.saveMessageIndex)
     }
   }
 
