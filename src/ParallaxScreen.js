@@ -140,7 +140,7 @@ export default class App extends React.Component {
     return (
       <View style={{flex: 1}}>
         <ParallaxSwiper
-          speed={0.3}
+          speed={0.2}
           animatedValue={this.swipeAnimatedValue}
           dividerWidth={8}
           dividerColor="black"
