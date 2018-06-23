@@ -17,11 +17,11 @@ const Item = class Item extends React.Component {
       setTimeout(_ => {
         Animated.timing(this.state.opacity, {
           toValue: 1,
-          duration: 450,
+          duration: 650,
           easing: Easing.easeOutExpo,
           useNativeDriver: true
         }).start()
-      }, 300)
+      }, 301)
     })
   }
 
