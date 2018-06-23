@@ -21,7 +21,7 @@ const Item = class Item extends React.Component {
           easing: Easing.easeOutExpo,
           useNativeDriver: true
         }).start()
-      }, 301)
+      }, 1)
     })
   }
 

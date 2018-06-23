@@ -59,7 +59,7 @@ export default class App extends React.Component {
   }
 
   async componentWillMount() {
-    bus.addListener('photoGalleryClosed', _ => this.closeDrawer())
+    bus.addListener('photoGalleryClosed', _ => setTimeout(_ => this.closeDrawer(), 100))
     bus.addListener('storySelected', async story => {
       const scrollToIndex = data.findIndex(d => d.id === story.id)
       this.setState({
