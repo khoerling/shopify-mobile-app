@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: 'rgba(255,255,255,.9)',
     marginVertical: 20,
     marginBottom: 30,
     marginHorizontal: 25,
