@@ -50,7 +50,7 @@ export default [
   },
   {
     id: '36378437285',
-    postedBy: 'Willa Wei',
+    postedBy: 'Ellis C. Malmgren',
     genre: 'Political Horror / Suspense',
     width: 640,
     height: 427,
