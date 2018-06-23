@@ -94,6 +94,7 @@ export default class App extends React.Component {
         this._drawer.close()
       }, 650)
     }
+    global.scrollDrawerBottom()
     StatusBar.setHidden(false, true) // show
   }
 
@@ -104,7 +105,6 @@ export default class App extends React.Component {
   onStopDrag() {
     setTimeout(_ => this.setState({isOnTop: this.state.isDrawerOpen ? true : false}), 100)
     StatusBar.setHidden(!this.state.isDrawerOpen, false) // hide & show
-    setTimeout(_ => global.scrollDrawerBottom({animated: true}), 200)
   }
 
   onScrollBegin(scrollToIndex) {
