@@ -4,20 +4,18 @@ import {
   Clipboard,
   StyleSheet,
   TouchableWithoutFeedback,
+  Animated,
   View,
   ViewPropTypes,
   Platform,
 } from 'react-native'
 
 export default class Message extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     return (
       <TouchableWithoutFeedback onPress={_ => this.props.onPress()}>
         {this.props.item.from === 'narration'
-          ? <View style={[{flex: 1, justifyContent: 'center'}]}>
+          ? <Animated.View style={[{flex: 1, justifyContent: 'center'}, this.props.style ? this.props.style : null]}>
               <Text
                 selectable={true}
                 style={[
@@ -25,18 +23,20 @@ export default class Message extends React.Component {
                   this.props.theme ? styles[`${this.props.theme}Narration`] : null]}>
                 {this.props.item.msg}
               </Text>
-            </View>
-          : <View style={[
+            </Animated.View>
+          : <Animated.View style={[
               styles.container,
               this.props.item.adjacent ? styles.adjacent : null,
               this.props.item.right ? styles.containerRight : null,
+              this.props.style ? this.props.style : null,
               this.props.theme ? styles[`${this.props.theme}Container`] : null]}>
               {this.props.item.adjacent ? null : <Text
                 selectable={true}
                 style={[
                   styles.from,
                   this.props.item.right ? styles.right : null,
-                  this.props.theme ? styles[`${this.props.theme}${this.props.item.right ? 'Right' : ''}From`] : null, ]}>
+                  this.props.theme ? styles[`${this.props.theme}${this.props.item.right ? 'Right' : ''}From`] : null,
+                  ]}>
                   {this.props.item.from}
               </Text>}
               <Text
@@ -47,7 +47,7 @@ export default class Message extends React.Component {
                   this.props.item.right ? styles.bodyRight : null]}>
                   {this.props.item.msg}
               </Text>
-            </View>
+            </Animated.View>
         }
       </TouchableWithoutFeedback>
     )

@@ -16,6 +16,7 @@ const
 export default class App extends React.Component {
   swipeAnimatedValue = new Animated.Value(0)
   state = {
+    buildInLastMessage: new Animated.Value(1),
     scale: new Animated.Value(1),
     isDrawerOpen: false,
     scrollToIndex: this.props.scrollToIndex || 0,
@@ -52,6 +53,7 @@ export default class App extends React.Component {
   story = _ => data[this.state.scrollToIndex]
   saveMessageIndex = _ => set(`msgs:${this.state.scrollToIndex}`, this.state.messageIndex)
   messageIndex = async scrollToIndex => (await get(`msgs:${scrollToIndex || this.state.scrollToIndex}`)) || 1
+  isLastMessage = (story, index) => index === 2
 
   componentWillUnmount() {
     bus.removeEventListener('photoGalleryClosed') // cleanup
@@ -126,13 +128,21 @@ export default class App extends React.Component {
         if (!isDroid) Haptic.impact(Haptic.ImpactStyles.Light)
       }, 150)
   }
-  async onPress() {
+  async onPress(params) {
     if (!this.state.isDrawerOpen) {
       this.openDrawer()
     } else {
-      if (!isDroid) Haptic.selection()
       if (this.state.isDrawerOpen) setTimeout(_ => global.scrollDrawerBottom({animated: true}), 150)
-      this.setState({messageIndex: this.state.messageIndex + 1}, this.saveMessageIndex)
+      this.setState({messageIndex: this.state.messageIndex + 1}, _ => {
+        if (params && params.animated)
+          Animated.spring(this.state.buildInLastMessage, {
+            toValue: 1,
+            velocity: 1.5,
+            bounciness: .1,
+          }).start()
+        if (!isDroid) Haptic.selection()
+        this.saveMessageIndex()
+      })
     }
   }
 
@@ -223,11 +233,12 @@ export default class App extends React.Component {
             headerIcon={'md-arrow-back'}
             data={messages}
             renderItem={
-              ({item, separators}) => <Message
+              ({index, item, separators}) => <Message
                 item={item}
-                style={{opacity: .5}}
+                index={index}
+                style={this.isLastMessage(item, index) ? {transform: [{scale: this.state.buildInLastMessage}]} : null}
                 theme={this.story().theme}
-                onPress={_ => this.onPress()}/>}
+                onPress={_ => this.onPress({animated: true})}/>}
                 header={''} />
         </Animated.View>
       </View>
