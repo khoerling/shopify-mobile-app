@@ -187,7 +187,7 @@ export default class App extends React.Component {
                     source={{ uri: story.source.uri }} />
                 }
                 ForegroundComponent={
-                  <BlurView intensity={40} key={story.id} style={[styles.foregroundTextContainer, {opacity: this.state.isDrawerOpen ? 0 : 1}]}>
+                  <BlurView intensity={65} key={story.id} style={[styles.foregroundTextContainer, {opacity: this.state.isDrawerOpen ? 0 : 1}]}>
                     {this.state.isDrawerOpen
                       ? null
                       : <Animated.View
@@ -230,7 +230,7 @@ export default class App extends React.Component {
             onStartDrag={_ => this.onStartDrag()}
             onStopDrag={_ => this.onStopDrag()}
             headerHeight={90}
-            teaserHeight={95}
+            teaserHeight={105}
             itemHeight={130}
             headerIcon={'md-arrow-back'}
             data={messages}

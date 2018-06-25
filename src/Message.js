@@ -49,8 +49,9 @@ export default class Message extends React.Component {
                 selectable={true}
                 style={[
                   styles.body,
-                  this.props.theme ? styles[`${this.props.theme}Body`] : null,
-                  this.props.item.right ? styles.bodyRight : null]}>
+                  this.props.theme ? styles[`${this.props.theme || ''}Body`] : null,
+                  this.props.item.right ? styles.bodyRight : null,
+                  this.props.item.abstract ? styles[`${this.props.theme || ''}AbstractText`] : null]}>
                   {this.props.item.msg || this.props.item.abstract}
               </Text>
             </Animated.View>
@@ -65,20 +66,29 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 10,
     backgroundColor: 'rgba(255,255,255,.94)',
-    padding: 10,
+    padding: 8,
     alignItems: 'flex-start',
     justifyContent: 'center',
     marginTop: 10,
     marginHorizontal: 7,
   },
   abstract: {
-    backgroundColor: 'rgba(255,255,255,.6)',
+    // backgroundColor: 'rgba(255,255,255,.3)',
+    backgroundColor: 'transparent',
+    minHeight: 90,
   },
   darkAbstract: {
-    backgroundColor: 'rgba(50,50,50,.8)',
+    // backgroundColor: 'rgba(250,250,250,.5)',
+    backgroundColor: 'transparent',
+    minHeight: 90,
   },
-  abstractText: {
-    fontSize: 11,
+  darkAbstractText: {
+    fontSize: 16,
+    color: 'rgba(0,0,0,.8)',
+  },
+  AbstractText: {
+    fontSize: 16,
+    color: 'rgba(255,255,255,.8)',
   },
   adjacent: {
     marginTop: 2,
