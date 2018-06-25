@@ -148,18 +148,20 @@ export default class App extends React.Component {
 
   render() {
     const messages =
-      this.state.isDrawerOpen ?
+      this.state.isDrawerOpen
+        ?
           []
           .concat({from: 'narration'})
           .concat({from: 'narration'})
           .concat(
-      this.story()
-        .messages
-        .slice(0, this.state.messageIndex)
-        .reverse())
-      : this.story()
-        .messages
-        .slice(0, 20)
+            this.story()
+              .messages
+              .slice(0, this.state.messageIndex)
+              .reverse())
+        : [{abstract: this.story().abstract}]
+          .concat(this.story()
+            .messages
+            .slice(0, 20))
     return (
       <View style={{flex: 1}}>
         <ParallaxSwiper
@@ -228,7 +230,7 @@ export default class App extends React.Component {
             onStartDrag={_ => this.onStartDrag()}
             onStopDrag={_ => this.onStopDrag()}
             headerHeight={90}
-            teaserHeight={85}
+            teaserHeight={95}
             itemHeight={130}
             headerIcon={'md-arrow-back'}
             data={messages}
@@ -238,7 +240,7 @@ export default class App extends React.Component {
                 index={index}
                 style={this.isLastMessage(item, index) ? {transform: [{scale: this.state.buildInLastMessage}]} : null}
                 theme={this.story().theme}
-                onPress={_ => this.onPress({animated: true})}/>}
+              onPress={_ => this.onPress({animated: true})} />}
                 header={''} />
         </Animated.View>
       </View>

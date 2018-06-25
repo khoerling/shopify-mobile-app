@@ -29,23 +29,29 @@ export default class Message extends React.Component {
               this.props.item.adjacent ? styles.adjacent : null,
               this.props.item.right ? styles.containerRight : null,
               this.props.style ? this.props.style : null,
-              this.props.theme ? styles[`${this.props.theme}Container`] : null]}>
-              {this.props.item.adjacent ? null : <Text
-                selectable={true}
-                style={[
-                  styles.from,
-                  this.props.item.right ? styles.right : null,
-                  this.props.theme ? styles[`${this.props.theme}${this.props.item.right ? 'Right' : ''}From`] : null,
-                  ]}>
-                  {this.props.item.from}
-              </Text>}
+              this.props.item.abstract ? styles.abstract : null,
+              this.props.theme ? styles[`${this.props.theme}Container`] : null,
+              this.props.item.abstract ? styles[`${this.props.theme}Abstract`] : null]}>
+              {this.props.item.adjacent
+                ? null
+                : this.props.item.from
+                  ? <Text
+                      selectable={true}
+                      style={[
+                        styles.from,
+                        this.props.item.right ? styles.right : null,
+                        this.props.theme ? styles[`${this.props.theme}${this.props.item.right ? 'Right' : ''}From`] : null,
+                        ]}>
+                        {this.props.item.from}
+                    </Text>
+                  : null}
               <Text
                 selectable={true}
                 style={[
                   styles.body,
                   this.props.theme ? styles[`${this.props.theme}Body`] : null,
                   this.props.item.right ? styles.bodyRight : null]}>
-                  {this.props.item.msg}
+                  {this.props.item.msg || this.props.item.abstract}
               </Text>
             </Animated.View>
         }
@@ -64,6 +70,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 10,
     marginHorizontal: 7,
+  },
+  abstract: {
+    backgroundColor: 'rgba(255,255,255,.6)',
+  },
+  darkAbstract: {
+    backgroundColor: 'rgba(50,50,50,.8)',
+  },
+  abstractText: {
+    fontSize: 11,
   },
   adjacent: {
     marginTop: 2,
