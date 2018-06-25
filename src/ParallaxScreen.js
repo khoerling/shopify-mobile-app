@@ -14,6 +14,7 @@ const
   isDroid = Platform.OS !== 'ios'
 
 export default class App extends React.Component {
+  animationTimeout = 100
   swipeAnimatedValue = new Animated.Value(0)
   state = {
     buildInLastMessage: new Animated.Value(1),
@@ -61,7 +62,7 @@ export default class App extends React.Component {
   }
 
   async componentWillMount() {
-    bus.addListener('photoGalleryClosed', _ => setTimeout(_ => this.closeDrawer(), 100))
+    bus.addListener('photoGalleryClosed', _ => setTimeout(_ => this.closeDrawer(), this.animationTimeout))
     bus.addListener('storySelected', async story => {
       const scrollToIndex = data.findIndex(d => d.id === story.id)
       this.setState({
@@ -91,10 +92,9 @@ export default class App extends React.Component {
       clearTimeout(this._close)
       this._close = null
     } else {
-      this._close= setTimeout(_ => {
-        this.setState({isOnTop: false})
-        this._drawer.close()
-      }, 650)
+      this._close= setTimeout(_ =>
+        this.setState({isOnTop: false}, this._drawer.close()),
+        this.animationTimeout)
     }
     global.scrollDrawerBottom()
     StatusBar.setHidden(false, true) // show
@@ -105,7 +105,7 @@ export default class App extends React.Component {
     StatusBar.setHidden(true, true) // hide & show
   }
   onStopDrag() {
-    setTimeout(_ => this.setState({isOnTop: this.state.isDrawerOpen ? true : false}), 100)
+    setTimeout(_ => this.setState({isOnTop: this.state.isDrawerOpen ? true : false}), this.animationTimeout)
     StatusBar.setHidden(!this.state.isDrawerOpen, false) // hide & show
   }
 
