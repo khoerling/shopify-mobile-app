@@ -12,47 +12,49 @@ import {
 
 export default class Message extends React.Component {
   render() {
+    const {item, theme, style, onPress} = this.props
+    if (!item) return <View style={{height: 20}}></View> // guard
     return (
-      <TouchableWithoutFeedback onPress={_ => this.props.onPress()}>
-        {this.props.item.from === 'narration'
-          ? <Animated.View style={[{flex: 1, justifyContent: 'center'}, this.props.style ? this.props.style : null]}>
+      <TouchableWithoutFeedback onPress={_ => onPress()}>
+        {item.from === 'narration'
+          ? <Animated.View style={[{flex: 1, justifyContent: 'center'}, style ? style : null]}>
               <Text
                 selectable={true}
                 style={[
                   styles.narration,
-                  this.props.theme ? styles[`${this.props.theme}Narration`] : null]}>
-                {this.props.item.msg}
+                  theme ? styles[`${theme}Narration`] : null]}>
+                {item.msg}
               </Text>
             </Animated.View>
           : <Animated.View style={[
               styles.container,
-              this.props.item.adjacent ? styles.adjacent : null,
-              this.props.item.right ? styles.containerRight : null,
-              this.props.style ? this.props.style : null,
-              this.props.item.abstract ? styles.abstract : null,
-              this.props.theme ? styles[`${this.props.theme}Container`] : null,
-              this.props.item.abstract ? styles[`${this.props.theme}Abstract`] : null]}>
-              {this.props.item.adjacent
+              item.adjacent ? styles.adjacent : null,
+              item.right ? styles.containerRight : null,
+              style ? style : null,
+              item.abstract ? styles.abstract : null,
+              theme ? styles[`${theme}Container`] : null,
+              item.abstract ? styles[`${theme}Abstract`] : null]}>
+              {item.adjacent
                 ? null
-                : this.props.item.from
+                : item.from
                   ? <Text
                       selectable={true}
                       style={[
                         styles.from,
-                        this.props.item.right ? styles.right : null,
-                        this.props.theme ? styles[`${this.props.theme}${this.props.item.right ? 'Right' : ''}From`] : null,
+                        item.right ? styles.right : null,
+                        theme ? styles[`${theme}${item.right ? 'Right' : ''}From`] : null,
                         ]}>
-                        {this.props.item.from}
+                        {item.from}
                     </Text>
                   : null}
               <Text
                 selectable={true}
                 style={[
                   styles.body,
-                  this.props.theme ? styles[`${this.props.theme || ''}Body`] : null,
-                  this.props.item.right ? styles.bodyRight : null,
-                  this.props.item.abstract ? styles[`${this.props.theme || ''}AbstractText`] : null]}>
-                  {this.props.item.msg || this.props.item.abstract}
+                  theme ? styles[`${theme || ''}Body`] : null,
+                  item.right ? styles.bodyRight : null,
+                  item.abstract ? styles[`${theme || ''}AbstractText`] : null]}>
+                  {item.msg || item.abstract}
               </Text>
             </Animated.View>
         }
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,.94)',
     padding: 8,
     alignItems: 'flex-start',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     marginTop: 10,
     marginHorizontal: 7,
   },
