@@ -2,12 +2,18 @@ import React, { Component, PureComponent } from 'react'
 import { Platform, TouchableWithoutFeedback, Animated, StyleSheet, Image, Text, ListView, View, Dimensions } from 'react-native'
 
 import ParallaxScreen from './src/ParallaxScreen'
-
 import PHOTOS from './src/data'
 import { processImages, buildRows, normalizeRows } from './src/utils'
 import PhotoGallery from './src/PhotoGallery'
 import GridItem from './src/GridItem'
 import EventEmitter from 'EventEmitter'
+
+import { createHttpLink } from 'apollo-link-http'
+import { setContext } from 'apollo-link-context'
+import { ApolloClient } from 'apollo-client'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { graphql, compose, ApolloProvider } from 'react-apollo'
+import gql from 'graphql-tag'
 
 const
   { width, height } = Dimensions.get("window"),
@@ -18,8 +24,21 @@ const
 
 Object.assign(global, {cw, js, bus})
 
+const
+  httpLink = createHttpLink({ uri: 'https://dont-be-a-pig.myshopify.com/admin/api/graphql.json' }),
+  middlewareLink = setContext(() => ({
+    headers: {
+      'Content-Type': 'application/graphql',
+      'Authorization': 'Basic ZjlkMjk1YmE5OTI2YzMyMDYwNDM3MjY0Y2YyMmZiMTg6NDJhZWZmN2I0MDBjMjQyYzQyYTQ3ZWU1MGM4ODY4MDA='
+    }
+  })),
+  client = new ApolloClient({
+    link: middlewareLink.concat(httpLink),
+    cache: new InMemoryCache(),
+  })
+
 export default class App extends Component {
-  componentWillMount() {
+  async componentWillMount() {
     const processedImages = processImages(PHOTOS)
     let rows = buildRows(processedImages, width)
     rows = normalizeRows(rows, width)
@@ -47,16 +66,17 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#000'}}>
-        <PhotoGallery
-          renderContent={({ onPhotoOpen }) =>
-                         <ListView
-                             dataSource={this.state.dataSource}
-                             renderRow={this.renderRow.bind(this, onPhotoOpen)}
-                           />}
-                         />
-                         )
-      </View>
+      <ApolloProvider client={client}>
+        <View style={{flex: 1, backgroundColor: '#000'}}>
+          <PhotoGallery
+            renderContent={({ onPhotoOpen }) =>
+              <ListView
+                dataSource={this.state.dataSource}
+                renderRow={this.renderRow.bind(this, onPhotoOpen)}
+              />}
+          />
+        </View>
+      </ApolloProvider>
     )
   }
 }

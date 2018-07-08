@@ -1,7 +1,9 @@
 import React from 'react'
-import { Platform, Easing, View, Animated } from 'react-native'
+import { Platform, Easing, Text, View, Animated } from 'react-native'
 import { Haptic } from 'expo'
 import PropTypes from 'prop-types'
+import { graphql, compose, ApolloProvider } from 'react-apollo'
+import gql from 'graphql-tag'
 
 import Transition from './Transition'
 import DetailScreen from './DetailScreen'
@@ -41,7 +43,7 @@ class PhotoGalleryPhoto extends React.Component {
   }
 }
 
-export default class PhotoGallery extends React.Component {
+const PhotoGallery = class PhotoGallery extends React.Component {
   static Photo = PhotoGalleryPhoto
 
   state = {
@@ -111,7 +113,24 @@ export default class PhotoGallery extends React.Component {
           openProgress={openProgress}
           isAnimating={isAnimating}
         />
+        <Text style={{position: 'absolute', top: 50, backgroundColor: 'rgba(0,0,0,.5)', color: '#fff'}}>{js(this.props.data.shop)}</Text>
       </View>
     )
   }
 }
+
+const simple = gql`
+query {
+  shop {
+    name
+    primaryDomain {
+      url
+      host
+    }
+  }
+}
+`
+
+export default compose(
+  graphql(simple),
+)(PhotoGallery);
