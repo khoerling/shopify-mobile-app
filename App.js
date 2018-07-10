@@ -1,55 +1,61 @@
 import React, { Component, PureComponent } from 'react'
-import { Platform, TouchableWithoutFeedback, Animated, StyleSheet, Image, Text, ListView, View, Dimensions } from 'react-native'
+import { SafeAreaView, StatusBar, Platform, TouchableWithoutFeedback, Animated, StyleSheet, Image, Text, ListView, View, Dimensions } from 'react-native'
+import { BlurView } from 'expo'
 
 import ParallaxScreen from './src/ParallaxScreen'
-import PHOTOS from './src/data'
 import { processImages, buildRows, normalizeRows } from './src/utils'
 import PhotoGallery from './src/PhotoGallery'
 import GridItem from './src/GridItem'
 import EventEmitter from 'EventEmitter'
 
-import { createHttpLink } from 'apollo-link-http'
-import { setContext } from 'apollo-link-context'
-import { ApolloClient } from 'apollo-client'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { graphql, compose, ApolloProvider } from 'react-apollo'
-import gql from 'graphql-tag'
+global.config = require('./config')
 
 const
   { width, height } = Dimensions.get("window"),
   js = JSON.stringify,
   cw = (...args) => console.warn(args),
+  screen = Dimensions.get('window'),
   bus = new EventEmitter(),
-  isDroid = Platform.OS !== 'ios'
+  isDroid = Platform.OS !== 'ios',
+  color = require('color')
 
 Object.assign(global, {cw, js, bus})
 
 const
-  httpLink = createHttpLink({ uri: 'https://dont-be-a-pig.myshopify.com/admin/api/graphql.json' }),
-  middlewareLink = setContext(() => ({
-    headers: {
-      'Content-Type': 'application/graphql',
-      'Authorization': 'Basic ZjlkMjk1YmE5OTI2YzMyMDYwNDM3MjY0Y2YyMmZiMTg6NDJhZWZmN2I0MDBjMjQyYzQyYTQ3ZWU1MGM4ODY4MDA='
-    }
-  })),
-  client = new ApolloClient({
-    link: middlewareLink.concat(httpLink),
-    cache: new InMemoryCache(),
-  })
+  {getProducts} = require('./src/api')
 
 export default class App extends Component {
+  state = {
+  }
+
   async componentWillMount() {
-    const processedImages = processImages(PHOTOS)
-    let rows = buildRows(processedImages, width)
+    const
+      products = await getProducts,
+      productImages = processImages(products)
+        .filter(p => p.node.productType === 'Meal')
+        .map((p, id) => {
+          return {
+            id,
+            title: p.node.title,
+            width: id % 5 === 0 ? 1024 : 1024 / 3,
+            type: p.node.productType,
+            amount: p.node.priceRange ? p.node.priceRange.maxVariantPrice.amount : "",
+            height: id % 5 === 0 ? 1024 : 1024 / 3,
+            source: {
+              uri: p.node.images.edges[0].node.transformedSrc,
+              cache: 'force-cache'
+            }
+          }
+        })
+    global.products = productImages // stash
+    let rows = buildRows(productImages, width)
     rows = normalizeRows(rows, width)
 
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     })
 
-    this.setState({
-      dataSource: ds.cloneWithRows(rows)
-    })
+    this.setState({dataSource: ds.cloneWithRows(rows)})
   }
 
   renderRow = (onPhotoOpen, row) =>
@@ -66,24 +72,44 @@ export default class App extends Component {
 
   render() {
     return (
-      <ApolloProvider client={client}>
-        <View style={{flex: 1, backgroundColor: '#000'}}>
-          <PhotoGallery
-            renderContent={({ onPhotoOpen }) =>
-              <ListView
-                dataSource={this.state.dataSource}
-                renderRow={this.renderRow.bind(this, onPhotoOpen)}
-              />}
-          />
+      <View style={styles.container}>
+        <StatusBar hidden={true} />
+        <View style={[styles.ribbon]}>
+          <SafeAreaView>
+            <Text style={styles.fillUp}>FILL UP!</Text>
+          </SafeAreaView>
         </View>
-      </ApolloProvider>
+        {this.state.dataSource
+          ?
+            <PhotoGallery
+              renderContent={({ onPhotoOpen }) =>
+                <ListView
+                  dataSource={this.state.dataSource}
+                  renderRow={this.renderRow.bind(this, onPhotoOpen)}
+                />}
+            />
+          : null}
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: config.accent,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  ribbon: {
+    top: 0,
+    position: 'absolute',
+    width: screen.width,
+  },
+  fillUp: {
+    fontWeight: 'bold',
+    fontSize: 30,
+    textAlign: 'center',
+    color: config.muted,
   },
 })

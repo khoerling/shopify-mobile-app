@@ -2,6 +2,7 @@ import React from 'react'
 import { Animated, Easing, StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native'
 import PhotoGallery from './PhotoGallery'
 import { LinearGradient } from 'expo'
+import config from '../config'
 
 const Item = class Item extends React.Component {
   state = {
@@ -37,10 +38,9 @@ const Item = class Item extends React.Component {
           }}
         />
         <Animated.View style={[styles.container, {opacity: this.state.opacity}]}>
-          <LinearGradient colors={['transparent', 'rgba(0,0,0,.2)', 'rgba(0,0,0,.7)', 'rgba(0,0,0,.99)']} style={styles.gradient}>
+          <LinearGradient colors={['transparent', 'rgba(255,255,255,.2)', 'rgba(255,255,255,.7)', 'rgba(255,255,255,.99)']} style={styles.gradient}>
             <View>
               <Text style={styles.h1}>{item.title}</Text>
-              <Text style={styles.h2}>{item.genre.toUpperCase()}</Text>
             </View>
           </LinearGradient>
         </Animated.View>
@@ -58,20 +58,14 @@ const styles = StyleSheet.create({
     right: 0,
   },
   h1: {
-    fontSize: 25,
-    lineHeight: 24,
+    ...config.styles.h1,
     letterSpacing: -1,
-    color: '#fff',
-    fontWeight: 'bold',
     paddingBottom: 5,
     paddingRight: 5,
   },
   h2: {
-    fontSize: 13,
-    lineHeight: 15,
-    color: '#fff',
+    ...config.styles.h2,
     opacity: .9,
-    fontWeight: 'bold',
     paddingBottom: 5,
     paddingRight: 5,
   },

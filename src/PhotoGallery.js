@@ -2,8 +2,6 @@ import React from 'react'
 import { Platform, Easing, Text, View, Animated } from 'react-native'
 import { Haptic } from 'expo'
 import PropTypes from 'prop-types'
-import { graphql, compose, ApolloProvider } from 'react-apollo'
-import gql from 'graphql-tag'
 
 import Transition from './Transition'
 import DetailScreen from './DetailScreen'
@@ -43,7 +41,7 @@ class PhotoGalleryPhoto extends React.Component {
   }
 }
 
-const PhotoGallery = class PhotoGallery extends React.Component {
+export default PhotoGallery = class PhotoGallery extends React.Component {
   static Photo = PhotoGalleryPhoto
 
   state = {
@@ -61,7 +59,7 @@ const PhotoGallery = class PhotoGallery extends React.Component {
   }
 
   componentWillMount() {
-    bus.addListener('storySelected', photo => {
+    bus.addListener('itemSelected', photo => {
       this.setState({photo})
     })
   }
@@ -78,7 +76,7 @@ const PhotoGallery = class PhotoGallery extends React.Component {
     if (!isDroid) Haptic.selection()
     this.setState({ photo, isAnimating: false })
     this.state.openProgress.setValue(1) // immediately open
-    bus.emit('storySelected', photo)    // photo is the full story
+    bus.emit('itemSelected', photo)    // photo is the full item
   }
 
   close = photoId => {
@@ -113,24 +111,7 @@ const PhotoGallery = class PhotoGallery extends React.Component {
           openProgress={openProgress}
           isAnimating={isAnimating}
         />
-        <Text style={{position: 'absolute', top: 50, backgroundColor: 'rgba(0,0,0,.5)', color: '#fff'}}>{js(this.props.data.shop)}</Text>
       </View>
     )
   }
 }
-
-const simple = gql`
-query {
-  shop {
-    name
-    primaryDomain {
-      url
-      host
-    }
-  }
-}
-`
-
-export default compose(
-  graphql(simple),
-)(PhotoGallery);

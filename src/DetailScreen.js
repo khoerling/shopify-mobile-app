@@ -10,7 +10,6 @@ import {
   Animated
 } from 'react-native'
 import ParallaxScreen from './ParallaxScreen'
-import PHOTOS from './data'
 
 const maxWidth = Dimensions.get('window').width
 
@@ -23,7 +22,7 @@ export default class DetailScreen extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { photo } = nextProps
     if (photo) {
-      const scrollToIndex = PHOTOS.findIndex(p => p.id === photo.id)
+      const scrollToIndex = global.products.findIndex(p => p.id === photo.id)
       this.setState({ localPhoto: photo, scrollToIndex })
     }
   }
