@@ -38,11 +38,9 @@ const Item = class Item extends React.Component {
           }}
         />
         <Animated.View style={[styles.container, {opacity: this.state.opacity}]}>
-          <LinearGradient colors={['transparent', 'rgba(255,255,255,.2)', 'rgba(255,255,255,.7)', 'rgba(255,255,255,.99)']} style={styles.gradient}>
-            <View>
-              <Text style={styles.h1}>{item.title}</Text>
+            <View style={styles.gradient}>
+              <Text style={styles.h1} numberOfLines={1}>{item.title}</Text>
             </View>
-          </LinearGradient>
         </Animated.View>
       </View>
     </TouchableWithoutFeedback>)
@@ -60,8 +58,14 @@ const styles = StyleSheet.create({
   h1: {
     ...config.styles.h1,
     letterSpacing: -1,
-    paddingBottom: 5,
-    paddingRight: 5,
+    marginBottom: 0,
+    color: config.white,
+    fontSize: 14,
+    textAlign: 'center',
+    position: 'absolute',
+    left: 5,
+    right: 5,
+    fontWeight: 'bold',
   },
   h2: {
     ...config.styles.h2,
@@ -71,7 +75,7 @@ const styles = StyleSheet.create({
   },
   gradient: {
     flex: 1,
-    paddingTop: 150,
+    paddingTop: 25,
     paddingLeft: 10,
     alignItems: 'flex-start',
     backgroundColor: 'transparent',

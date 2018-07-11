@@ -76,7 +76,7 @@ export default PhotoGallery = class PhotoGallery extends React.Component {
     if (!isDroid) Haptic.selection()
     this.setState({ photo, isAnimating: false })
     this.state.openProgress.setValue(1) // immediately open
-    bus.emit('itemSelected', photo)    // photo is the full item
+    bus.emit('itemSelected', photo) // photo is the full item
   }
 
   close = photoId => {

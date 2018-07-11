@@ -3,7 +3,7 @@ import {
 } from 'react-native'
 
 const TARGET_HEIGHT = 350
-const BORDER_OFFSET = 5
+const BORDER_OFFSET = 1
 const MAX_WIDTH = Dimensions.get('window').width
 
 function makeSmaller(image, amount) {

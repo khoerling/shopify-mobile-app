@@ -22,11 +22,12 @@ const
 Object.assign(global, {cw, js, bus})
 
 const
-  {getProducts} = require('./src/api')
+  {getProducts} = require('./src/api'),
+  cheerio = require('react-native-cheerio'),
+  R = require('ramda')
 
 export default class App extends Component {
-  state = {
-  }
+  state = {}
 
   async componentWillMount() {
     const
@@ -34,10 +35,18 @@ export default class App extends Component {
       productImages = processImages(products)
         .filter(p => p.node.productType === 'Meal')
         .map((p, id) => {
+          const $ = cheerio.load(p.node.descriptionHtml)
           return {
             id,
             title: p.node.title,
             width: id % 5 === 0 ? 1024 : 1024 / 3,
+            ingredients: $('.ingredients p').text(),
+            description: $('.description p').text(),
+            attributes:
+              R.flatten($('.details li')
+                .text()
+                .replace(/[\n]+/g, "\n")
+                .split("\n")),
             type: p.node.productType,
             amount: p.node.priceRange ? p.node.priceRange.maxVariantPrice.amount : "",
             height: id % 5 === 0 ? 1024 : 1024 / 3,
@@ -62,7 +71,7 @@ export default class App extends Component {
     <View
       style={{
         flexDirection: 'row',
-        marginBottom: 5,
+        marginBottom: 2,
         justifyContent: 'space-between'
       }}>
       {row.map(item =>
@@ -97,7 +106,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: config.accent,
+    backgroundColor: config.white,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -110,6 +119,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
     textAlign: 'center',
-    color: config.muted,
+    color: config.accent,
   },
 })

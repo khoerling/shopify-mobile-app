@@ -3,6 +3,7 @@ import { StatusBar, Platform, PanResponder, TouchableWithoutFeedback, Animated, 
 import { ParallaxSwiper, ParallaxSwiperPage } from "react-native-parallax-swiper"
 import { Haptic } from 'expo'
 import { BlurView } from 'expo'
+import config from '../config'
 
 import Message from './Message'
 import { get, set } from './storage'
@@ -10,6 +11,20 @@ import { get, set } from './storage'
 const
   { width, height } = Dimensions.get("window"),
   isDroid = Platform.OS !== 'ios'
+
+const Attributes = ({item}) =>
+  <View style={styles.attributes}>
+    {item.attributes.map(a => {
+      if (!a) return null // guard
+      const [name, value] = a.split(' ')
+      return <View key={a} style={styles.attribute}>
+        <View style={styles.attributeBubble}>
+          <Text style={styles.attributeName}>{name}</Text>
+        </View>
+        <Text style={styles.attributeValue}>{value}</Text>
+      </View>
+    })}
+  </View>
 
 export default class App extends React.Component {
   animationTimeout = 100
@@ -67,28 +82,27 @@ export default class App extends React.Component {
   }
 
   openDrawer() {
-    if (this._close) {
-      // cancel close
-      clearTimeout(this._close)
-      this._close = null
-    }
-    this.setState({isDrawerOpen: true, isOnTop: true})
-    if (this._drawer) this._drawer.open()
-    if (!isDroid) Haptic.notification(Haptic.NotificationTypes.Success)
-    StatusBar.setHidden(true, false) // hide
+    // if (this._close) {
+    //   // cancel close
+    //   clearTimeout(this._close)
+    //   this._close = null
+    // }
+    // this.setState({isDrawerOpen: true, isOnTop: true})
+    // if (!isDroid) Haptic.notification(Haptic.NotificationTypes.Success)
+    // StatusBar.setHidden(true, false) // hide
   }
 
   closeDrawer() {
-    this.setState({isDrawerOpen: false})
-    if (this._close) { // guard
-      clearTimeout(this._close)
-      this._close = null
-    } else {
-      this._close= setTimeout(_ =>
-        this.setState({isOnTop: false}),
-        this.animationTimeout)
-    }
-    StatusBar.setHidden(false, true) // show
+    // this.setState({isDrawerOpen: false})
+    // if (this._close) { // guard
+    //   clearTimeout(this._close)
+    //   this._close = null
+    // } else {
+    //   this._close= setTimeout(_ =>
+    //     this.setState({isOnTop: false}),
+    //     this.animationTimeout)
+    // }
+    // StatusBar.setHidden(false, true) // show
   }
 
   onStartDrag() {
@@ -135,7 +149,7 @@ export default class App extends React.Component {
           animatedValue={this.swipeAnimatedValue}
           dividerWidth={8}
           dividerColor={config.accent}
-          backgroundColor="#fff"
+          backgroundColor={config.accent}
           onMomentumScrollEnd={i => this.onScrollEnd(i)}
           onScrollBeginDrag={i => this.onScrollBegin(i)}
           showsHorizontalScrollIndicator={false}
@@ -153,7 +167,7 @@ export default class App extends React.Component {
                     source={{ uri: item.source.uri }} />
                 }
                 ForegroundComponent={
-                  <BlurView intensity={65} key={item.id} style={[styles.foregroundTextContainer, {opacity: this.state.isDrawerOpen ? 0 : 1}]}>
+                  <BlurView intensity={80} key={item.id} style={[styles.foregroundTextContainer, {opacity: this.state.isDrawerOpen ? 0 : 1}]}>
                     {this.state.isDrawerOpen
                       ? null
                       : <Animated.View
@@ -172,7 +186,10 @@ export default class App extends React.Component {
                           ]}>
                           <TouchableWithoutFeedback onPress={_ => this.openDrawer()}>
                             <View>
+                              <Attributes item={item} />
                               <Text style={[styles.foregroundText]}>{item.title.toUpperCase()}</Text>
+                              <Text style={[styles.description]}>{item.description}</Text>
+                              <Text style={[styles.description, styles.ingredients]}>{item.ingredients}</Text>
                             </View>
                           </TouchableWithoutFeedback>
                         </Animated.View>
@@ -213,28 +230,50 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     marginRight: 25,
-    fontSize: 34,
+    fontSize: 24,
     lineHeight: 32,
+    textAlign: 'justify',
     fontWeight: "700",
     letterSpacing: 0.41,
-    color: "white"
+    color: config.dark,
   },
-  abstractText: {
-    fontSize: 13,
+  description: {
+    textAlign: 'justify',
+    lineHeight: 20,
+    fontSize: 15,
+    letterSpacing: -1,
     fontWeight: '400',
     paddingRight: 25,
-    color: 'rgba(255,255,255,.85)',
+    color: config.dark,
   },
-  authorText: {
-    fontSize: 14,
-    marginTop: 5,
-    fontWeight: "700",
-    color: 'rgba(255,255,255,.85)',
+  ingredients: {
+    fontSize: 10,
+    lineHeight: 12,
+    fontWeight: 'bold',
+    paddingTop: 5,
+    color: config.accent,
   },
-  dark: {
-    color: 'rgba(0,0,0,.8)',
+  attributes: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
-  downArrow: {
-    color: '#eee',
+  attributeBubble: {
+    backgroundColor: config.accent,
+    borderRadius: 100,
+    margin: 5,
+    padding: 12,
+  },
+  attributeName: {
+    color: config.white,
+    fontWeight: 'bold',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  attributeValue: {
+    color: config.accent,
+    fontWeight: 'bold',
+    letterSpacing: -1,
+    flex: 1,
+    textAlign: 'center',
   }
 })
