@@ -106,6 +106,8 @@ export default class App extends React.Component {
   onScrollEnd(scrollToIndex) {
     if (this._endTimer) clearTimeout(this._endTimer)
     if (scrollToIndex === this.state.scrollToIndex) return false
+    if (scrollToIndex === this.lastScrollToIndex) return false
+    this.lastScrollToIndex = scrollToIndex
     this._endTimer =
       setTimeout(_ => {
         // update index and bounce bottom-drawer teaser in
