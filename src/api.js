@@ -7,7 +7,7 @@ module.exports = {
   getProducts: request('getProducts', 'products.edges', `
     {
       shop {
-        products(first: 50) {
+        products(first: 20) {
           edges {
             node {
               id
@@ -19,7 +19,7 @@ module.exports = {
                   amount
                 }
               }
-              images(first: 10) {
+              images(first: 1) {
                 edges {
                   node {
                     transformedSrc
