@@ -3,8 +3,10 @@ import { StatusBar, Platform, PanResponder, TouchableWithoutFeedback, Animated, 
 import { ParallaxSwiper, ParallaxSwiperPage } from "react-native-parallax-swiper"
 import { Haptic } from 'expo'
 import { BlurView } from 'expo'
-import config from '../config'
+import Select from 'react-native-picker-select'
+import Counter from './Counter'
 
+import config from '../config'
 import Message from './Message'
 import { get, set } from './storage'
 
@@ -133,7 +135,7 @@ export default class App extends React.Component {
           bounciness: .1,
         }).start()
         if (!isDroid) Haptic.impact(Haptic.ImpactStyles.Light)
-      }, 150)
+      }, 250)
   }
   async onPress(params) {
     if (!this.state.isDrawerOpen) {
@@ -149,7 +151,7 @@ export default class App extends React.Component {
           animatedValue={this.swipeAnimatedValue}
           dividerWidth={8}
           dividerColor={config.accent}
-          backgroundColor={config.accent}
+          backgroundColor={config.white}
           onMomentumScrollEnd={i => this.onScrollEnd(i)}
           onScrollBeginDrag={i => this.onScrollBegin(i)}
           showsHorizontalScrollIndicator={false}
@@ -167,7 +169,7 @@ export default class App extends React.Component {
                     source={{ uri: item.source.uri }} />
                 }
                 ForegroundComponent={
-                  <BlurView intensity={80} key={item.id} style={[styles.foregroundTextContainer, {opacity: this.state.isDrawerOpen ? 0 : 1}]}>
+                  <BlurView intensity={0} key={item.id} style={[styles.foregroundTextContainer, {opacity: this.state.isDrawerOpen ? 0 : 1}]}>
                     {this.state.isDrawerOpen
                       ? null
                       : <Animated.View
@@ -187,6 +189,7 @@ export default class App extends React.Component {
                           <TouchableWithoutFeedback onPress={_ => this.openDrawer()}>
                             <View>
                               <Attributes item={item} />
+                              <Counter />
                               <Text style={[styles.foregroundText]}>{item.title.toUpperCase()}</Text>
                               <Text style={[styles.description]}>{item.description}</Text>
                               <Text style={[styles.description, styles.ingredients]}>{item.ingredients}</Text>
@@ -211,7 +214,8 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     width,
-    height,
+    height: height - 100,
+    marginTop: -175,
   },
   foregroundTextContainer: {
     flex: 1,
@@ -232,13 +236,13 @@ const styles = StyleSheet.create({
     marginRight: 25,
     fontSize: 24,
     lineHeight: 32,
-    textAlign: 'justify',
+    textAlign: 'center',
     fontWeight: "700",
     letterSpacing: 0.41,
     color: config.dark,
   },
   description: {
-    textAlign: 'justify',
+    textAlign: 'center',
     lineHeight: 20,
     fontSize: 15,
     letterSpacing: -1,
