@@ -2,7 +2,6 @@ import React from 'react'
 import { StatusBar, Platform, PanResponder, TouchableWithoutFeedback, Animated, StyleSheet, Image, Text, View, Dimensions } from 'react-native'
 import { ParallaxSwiper, ParallaxSwiperPage } from "react-native-parallax-swiper"
 import { Haptic } from 'expo'
-import { BlurView } from 'expo'
 import Select from 'react-native-picker-select'
 import Counter from './Counter'
 
@@ -131,11 +130,11 @@ export default class App extends React.Component {
         bus.emit('itemSelected', this.item())
         Animated.spring(this.state.scale, {
           toValue: 1,
-          velocity: 1.5,
+          velocity: 5,
           bounciness: .1,
         }).start()
         if (!isDroid) Haptic.impact(Haptic.ImpactStyles.Light)
-      }, 250)
+      }, 150)
   }
   async onPress(params) {
     if (!this.state.isDrawerOpen) {
@@ -169,7 +168,7 @@ export default class App extends React.Component {
                     source={{ uri: item.source.uri }} />
                 }
                 ForegroundComponent={
-                  <BlurView intensity={0} key={item.id} style={[styles.foregroundTextContainer, {opacity: this.state.isDrawerOpen ? 0 : 1}]}>
+                  <View key={item.id} style={[styles.foregroundTextContainer, {opacity: this.state.isDrawerOpen ? 0 : 1}]}>
                     {this.state.isDrawerOpen
                       ? null
                       : <Animated.View
@@ -189,7 +188,9 @@ export default class App extends React.Component {
                           <TouchableWithoutFeedback onPress={_ => this.openDrawer()}>
                             <View>
                               <Attributes item={item} />
-                              <Counter />
+                              <Animated.View style={[{transform: [{scale: this.state.scale}]}]}>
+                                <Counter />
+                              </Animated.View>
                               <Text style={[styles.foregroundText]}>{item.title.toUpperCase()}</Text>
                               <Text style={[styles.description]}>{item.description}</Text>
                               <Text style={[styles.description, styles.ingredients]}>{item.ingredients}</Text>
@@ -197,7 +198,7 @@ export default class App extends React.Component {
                           </TouchableWithoutFeedback>
                         </Animated.View>
                     }
-                  </BlurView>
+                  </View>
                 }
               />
             ))}
