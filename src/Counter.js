@@ -75,7 +75,7 @@ export default class Counter extends React.Component {
       transform = {
         transform: [
           {
-            translateX: this.state.animation.interpolate({inputRange: [0, 1], outputRange: [-25, 0]})
+            translateX: this.state.animation.interpolate({inputRange: [0, 1], outputRange: [-26, 0]})
           },
         ]
       }
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     color: config.white,
+    textAlign: 'center',
     paddingHorizontal: 15,
   },
   incdec: {
