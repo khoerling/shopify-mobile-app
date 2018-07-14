@@ -27,7 +27,7 @@ const
   cheerio = require('react-native-cheerio'),
   R = require('ramda')
 
-export default class App extends Component {
+const App = class App extends Component {
   state = {
   }
 
@@ -106,12 +106,14 @@ export default class App extends Component {
 
 const Navigator = FluidNavigator({
   intro: { screen: Intro },
-  gallery: { screen: PhotoGallery },
+  app: { screen: App },
 }, {
   navigationOptions: {
     gesturesEnabled: true,
   },
 })
+
+export default Navigator
 
 const styles = StyleSheet.create({
   container: {

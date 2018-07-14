@@ -6,7 +6,6 @@ import Select from 'react-native-picker-select'
 import Counter from './../Counter'
 
 import config from '../../config'
-import Message from './../Message'
 import { get, set } from './../storage'
 
 const

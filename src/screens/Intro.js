@@ -11,19 +11,27 @@ export default class Intro extends React.Component {
     collapsed: false,
   }
 
+  select(selection) {
+    this.props.navigation.navigate('app')
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <ImageBackground style={styles.img} source={require('../../assets/images/Pig-Closeup.jpg')}>
-          <View style={styles.chooser}>
-            <Text style={styles.text}>WEEKLY MEALS</Text>
-          </View>
+          <TouchableWithoutFeedback onPress={_ => this.select('weekly')}>
+            <View style={styles.chooser}>
+              <Text style={styles.text}>WEEKLY MEALS</Text>
+            </View>
+          </TouchableWithoutFeedback>
         </ImageBackground>
         <Image style={styles.splitter} resizeMode={'contain'} source={require('../../assets/images/pick-one-vertical.png')}/>
         <ImageBackground style={styles.img} source={require('../../assets/images/Girl-with-Pig.jpg')}>
-          <View style={styles.chooser}>
-            <Text style={styles.text}>ONE TIME ORDER</Text>
-          </View>
+          <TouchableWithoutFeedback onPress={_ => this.select('weekly')}>
+            <View style={styles.chooser}>
+              <Text style={styles.text}>ONE TIME ORDER</Text>
+            </View>
+          </TouchableWithoutFeedback>
         </ImageBackground>
       </View>
     )
@@ -58,5 +66,6 @@ const styles = StyleSheet.create({
   splitter: {
     flex: 1,
     width,
+    maxHeight: 200,
   },
 })
