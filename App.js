@@ -6,6 +6,7 @@ import ParallaxScreen from './src/ParallaxScreen'
 import { processImages, buildRows, normalizeRows } from './src/utils'
 import PhotoGallery from './src/PhotoGallery'
 import GridItem from './src/GridItem'
+import Intro from './src/Intro'
 import EventEmitter from 'EventEmitter'
 
 global.config = require('./config')
@@ -98,6 +99,7 @@ export default class App extends Component {
                 />}
             />
           : null}
+        <Intro />
       </View>
     )
   }
