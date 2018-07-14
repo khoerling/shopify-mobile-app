@@ -3,8 +3,8 @@ import { Platform, Easing, Text, View, Animated } from 'react-native'
 import { Haptic } from 'expo'
 import PropTypes from 'prop-types'
 
-import Transition from './Transition'
-import DetailScreen from './DetailScreen'
+import Transition from '../Transition'
+import Details from './Details'
 
 const isDroid = Platform.OS !== 'ios'
 
@@ -85,7 +85,7 @@ export default PhotoGallery = class PhotoGallery extends React.Component {
       Animated.timing(this.state.openProgress, {
         toValue: 0,
         duration: 300,
-        easing: Easing.easeInExpo,
+         asing: Easing.easeInExpo,
         useNativeDriver: true
       }).start(() => {
         this._imageOpacitySetters[photoId](1)
@@ -105,7 +105,7 @@ export default PhotoGallery = class PhotoGallery extends React.Component {
           sourceImageRefs={this._images}
           isAnimating={isAnimating}
         />
-        <DetailScreen
+        <Details
           photo={photo}
           onClose={this.close}
           openProgress={openProgress}

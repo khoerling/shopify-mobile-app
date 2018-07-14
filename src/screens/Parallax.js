@@ -3,11 +3,11 @@ import { StatusBar, Platform, PanResponder, TouchableWithoutFeedback, Animated, 
 import { ParallaxSwiper, ParallaxSwiperPage } from "react-native-parallax-swiper"
 import { Haptic } from 'expo'
 import Select from 'react-native-picker-select'
-import Counter from './Counter'
+import Counter from './../Counter'
 
-import config from '../config'
-import Message from './Message'
-import { get, set } from './storage'
+import config from '../../config'
+import Message from './../Message'
+import { get, set } from './../storage'
 
 const
   { width, height } = Dimensions.get("window"),

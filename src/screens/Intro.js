@@ -3,7 +3,7 @@ import { TouchableWithoutFeedback, Animated, StyleSheet, Image, ImageBackground,
 import { Haptic } from 'expo'
 
 const
-  config = require('../config'),
+  config = require('../../config'),
   { width, height } = Dimensions.get('window')
 
 export default class Intro extends React.Component {
@@ -14,13 +14,13 @@ export default class Intro extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ImageBackground style={styles.img} source={require('../assets/images/Pig-Closeup.jpg')}>
+        <ImageBackground style={styles.img} source={require('../../assets/images/Pig-Closeup.jpg')}>
           <View style={styles.chooser}>
             <Text style={styles.text}>WEEKLY MEALS</Text>
           </View>
         </ImageBackground>
-        <Image style={styles.splitter} resizeMode={'contain'} source={require('../assets/images/pick-one-vertical.png')}/>
-        <ImageBackground style={styles.img} source={require('../assets/images/Girl-with-Pig.jpg')}>
+        <Image style={styles.splitter} resizeMode={'contain'} source={require('../../assets/images/pick-one-vertical.png')}/>
+        <ImageBackground style={styles.img} source={require('../../assets/images/Girl-with-Pig.jpg')}>
           <View style={styles.chooser}>
             <Text style={styles.text}>ONE TIME ORDER</Text>
           </View>

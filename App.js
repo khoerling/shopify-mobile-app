@@ -1,13 +1,13 @@
 import React, { Component, PureComponent } from 'react'
-import { SafeAreaView, StatusBar, Platform, TouchableWithoutFeedback, Animated, StyleSheet, Image, Text, ListView, View, Dimensions } from 'react-native'
-import { BlurView } from 'expo'
-
-import ParallaxScreen from './src/ParallaxScreen'
-import { processImages, buildRows, normalizeRows } from './src/utils'
-import PhotoGallery from './src/PhotoGallery'
-import GridItem from './src/GridItem'
-import Intro from './src/Intro'
+import { SafeAreaView, StatusBar, Platform, StyleSheet, Text, ListView, View, Dimensions } from 'react-native'
+import { Transition, FluidNavigator } from 'react-navigation-fluid-transitions'
 import EventEmitter from 'EventEmitter'
+
+import GridItem from './src/GridItem'
+import Parallax from './src/screens/Parallax'
+import Intro from './src/screens/Intro'
+import PhotoGallery from './src/screens/PhotoGallery'
+import { processImages, buildRows, normalizeRows } from './src/utils'
 
 global.config = require('./config')
 
@@ -28,7 +28,8 @@ const
   R = require('ramda')
 
 export default class App extends Component {
-  state = {}
+  state = {
+  }
 
   async componentWillMount() {
     const
@@ -43,11 +44,10 @@ export default class App extends Component {
             width: id % 5 === 0 ? 1024 : 1024 / 3,
             ingredients: $('.ingredients p').text(),
             description: $('.description p').text(),
-            attributes:
-              R.flatten($('.details li')
-                .text()
-                .replace(/[\n]+/g, "\n")
-                .split("\n")),
+            attributes: R.flatten($('.details li')
+              .text()
+              .replace(/[\n]+/g, "\n")
+              .split("\n")),
             type: p.node.productType,
             amount: p.node.priceRange ? p.node.priceRange.maxVariantPrice.amount : "",
             height: id % 5 === 0 ? 1024 : 1024 / 3,
@@ -99,11 +99,19 @@ export default class App extends Component {
                 />}
             />
           : null}
-        <Intro />
       </View>
     )
   }
 }
+
+const Navigator = FluidNavigator({
+  intro: { screen: Intro },
+  gallery: { screen: PhotoGallery },
+}, {
+  navigationOptions: {
+    gesturesEnabled: true,
+  },
+})
 
 const styles = StyleSheet.create({
   container: {
