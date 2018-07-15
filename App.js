@@ -1,5 +1,5 @@
 import React, { Component, PureComponent } from 'react'
-import { TouchableWithoutFeedback, ImageBackground, SafeAreaView, StatusBar, Platform, StyleSheet, Text, ListView, View, Dimensions } from 'react-native'
+import { Easing, TouchableWithoutFeedback, ImageBackground, SafeAreaView, StatusBar, Platform, StyleSheet, Text, ListView, View, Dimensions } from 'react-native'
 import { Transition, FluidNavigator } from 'react-navigation-fluid-transitions'
 import EventEmitter from 'EventEmitter'
 
@@ -82,6 +82,7 @@ const App = class App extends Component {
 
   render() {
     return (
+      <Transition appear="vertical">
       <View style={styles.container}>
         <StatusBar hidden={true} />
         {this.state.dataSource
@@ -95,6 +96,7 @@ const App = class App extends Component {
             />
           : null}
       </View>
+      </Transition>
     )
   }
 }
@@ -103,6 +105,10 @@ const Navigator = FluidNavigator({
   intro: { screen: Intro },
   app: { screen: App },
 }, {
+  transitionConfig: {
+    duration: 350,
+    easing: Easing.out(Easing.cubic)
+  },
   navigationOptions: {
     gesturesEnabled: false,
   },

@@ -10,7 +10,7 @@ const
 
 export default class Intro extends React.Component {
   state = {
-    buildIn: new Animated.Value(100),
+    buildIn: new Animated.Value(80),
     isLoading: false,
     imagesLoaded: 0,
     isHidden: false,
@@ -20,15 +20,16 @@ export default class Intro extends React.Component {
     const
       imagesLoaded = this.state.imagesLoaded + 1,
       isLoading = imagesLoaded <= 2
+    this.setState({isLoading, imagesLoaded}, _ => {
     if (!isLoading) this.buildIn()
-    this.setState({isLoading, imagesLoaded})
+                 })
   }
 
   buildIn() {
     Animated.timing(this.state.buildIn, {
       toValue: 0,
       easing: Easing.in(Easing.cubic),
-      duration: 150
+      duration: 150,
     }).start(_ => {
       this.setState({isHidden: true})
     })
