@@ -1,14 +1,37 @@
 import React from 'react'
-import { TouchableWithoutFeedback, Animated, StyleSheet, Image, ImageBackground, Text, View, Dimensions } from 'react-native'
-import { Haptic } from 'expo'
+import { Easing, TouchableWithoutFeedback, Animated, StyleSheet, Image, ImageBackground, Text, View, Dimensions } from 'react-native'
+import { Transition, FluidNavigator } from 'react-navigation-fluid-transitions'
+import { BlurView, Haptic } from 'expo'
 
 const
   config = require('../../config'),
-  { width, height } = Dimensions.get('window')
+  { width, height } = Dimensions.get('window'),
+  AnimatedBlurView = Animated.createAnimatedComponent(BlurView)
 
 export default class Intro extends React.Component {
   state = {
-    collapsed: false,
+    buildIn: new Animated.Value(100),
+    isLoading: false,
+    imagesLoaded: 0,
+    isHidden: false,
+  }
+
+  onLoad() {
+    const
+      imagesLoaded = this.state.imagesLoaded + 1,
+      isLoading = imagesLoaded <= 2
+    if (!isLoading) this.buildIn()
+    this.setState({isLoading, imagesLoaded})
+  }
+
+  buildIn() {
+    Animated.timing(this.state.buildIn, {
+      toValue: 0,
+      easing: Easing.in(Easing.cubic),
+      duration: 150
+    }).start(_ => {
+      this.setState({isHidden: true})
+    })
   }
 
   select(selection) {
@@ -18,21 +41,28 @@ export default class Intro extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ImageBackground style={styles.img} source={require('../../assets/images/Pig-Closeup.jpg')}>
-          <TouchableWithoutFeedback onPress={_ => this.select('weekly')}>
-            <View style={styles.chooser}>
-              <Text style={styles.text}>WEEKLY MEALS</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        </ImageBackground>
-        <Image style={styles.splitter} resizeMode={'contain'} source={require('../../assets/images/pick-one-vertical.png')}/>
-        <ImageBackground style={styles.img} source={require('../../assets/images/Girl-with-Pig.jpg')}>
-          <TouchableWithoutFeedback onPress={_ => this.select('weekly')}>
-            <View style={styles.chooser}>
-              <Text style={styles.text}>ONE TIME ORDER</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        </ImageBackground>
+          <ImageBackground onLoadEnd={_ => this.onLoad()} style={styles.img} source={require('../../assets/images/Pig-Closeup.jpg')}>
+            <TouchableWithoutFeedback onPress={_ => this.select('weekly')}>
+              <View style={styles.chooser}>
+                <Text style={styles.text}>WEEKLY MEALS</Text>
+              </View>
+            </TouchableWithoutFeedback>
+          </ImageBackground>
+            <Image onLoadEnd={_ => this.onLoad()} style={styles.splitter} resizeMode={'contain'} source={require('../../assets/images/pick-one-vertical.png')}/>
+          <ImageBackground onLoadEnd={_ => this.onLoad()} style={styles.img} source={require('../../assets/images/Girl-with-Pig.jpg')}>
+            <TouchableWithoutFeedback onPress={_ => this.select('weekly')}>
+              <View style={styles.chooser}>
+                <Text style={styles.text}>ONE TIME ORDER</Text>
+              </View>
+            </TouchableWithoutFeedback>
+          </ImageBackground>
+          {this.state.isHidden
+            ? null
+            : <AnimatedBlurView
+              tint="light"
+              intensity={this.state.buildIn}
+              style={StyleSheet.absoluteFill} />
+            }
       </View>
     )
   }
