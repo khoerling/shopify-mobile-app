@@ -123,8 +123,8 @@ export default class Transition extends React.Component {
               },
               {
                 scale: openProgress.interpolate({
-                  inputRange: [0.01, 0.99],
-                  outputRange: [openingInitScale, 1]
+                  inputRange: [0.01, 0.08, 0.99],
+                  outputRange: [openingInitScale, .95, 1]
                 })
               }
             ]
