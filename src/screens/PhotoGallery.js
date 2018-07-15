@@ -59,9 +59,13 @@ export default PhotoGallery = class PhotoGallery extends React.Component {
   }
 
   componentWillMount() {
-    bus.addListener('itemSelected', photo => {
+    this._updatePhoto = photo => {
       this.setState({photo})
-    })
+    }
+    bus.addListener('itemSelected', this._updatePhoto)
+  }
+  componentWillUnmount() {
+    bus.removeListener('itemSelected', this._updatePhoto)
   }
   getChildContext() {
     return { onImageRef: this._onImageRef }
