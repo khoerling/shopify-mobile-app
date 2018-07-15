@@ -1,5 +1,5 @@
 import React, { Component, PureComponent } from 'react'
-import { SafeAreaView, StatusBar, Platform, StyleSheet, Text, ListView, View, Dimensions } from 'react-native'
+import { TouchableWithoutFeedback, ImageBackground, SafeAreaView, StatusBar, Platform, StyleSheet, Text, ListView, View, Dimensions } from 'react-native'
 import { Transition, FluidNavigator } from 'react-navigation-fluid-transitions'
 import EventEmitter from 'EventEmitter'
 
@@ -84,11 +84,6 @@ const App = class App extends Component {
     return (
       <View style={styles.container}>
         <StatusBar hidden={true} />
-        <View style={[styles.ribbon]}>
-          <SafeAreaView>
-            <Text style={styles.fillUp}>FILL UP!</Text>
-          </SafeAreaView>
-        </View>
         {this.state.dataSource
           ?
             <PhotoGallery
@@ -109,7 +104,7 @@ const Navigator = FluidNavigator({
   app: { screen: App },
 }, {
   navigationOptions: {
-    gesturesEnabled: true,
+    gesturesEnabled: false,
   },
 })
 
@@ -125,12 +120,17 @@ const styles = StyleSheet.create({
   ribbon: {
     top: 0,
     position: 'absolute',
-    width: screen.width,
+    width: width,
   },
   fillUp: {
     fontWeight: 'bold',
     fontSize: 30,
     textAlign: 'center',
     color: config.accent,
+  },
+  img: {
+    ...StyleSheet.absoluteFillObject,
+    flex: 1,
+    width,
   },
 })

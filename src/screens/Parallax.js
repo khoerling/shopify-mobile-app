@@ -9,6 +9,7 @@ import config from '../../config'
 import { get, set } from './../storage'
 
 const
+  color = require('color'),
   { width, height } = Dimensions.get("window"),
   isDroid = Platform.OS !== 'ios'
 
@@ -66,13 +67,13 @@ export default class App extends React.Component {
   item = _ => global.products[this.state.scrollToIndex]
 
   componentWillUnmount() {
-    bus.removeEventListener('photoGalleryClosed') // cleanup
+    global.bus.removeEventListener('photoGalleryClosed') // cleanup
     this.saveMessageIndex()
   }
 
   async componentWillMount() {
-    bus.addListener('photoGalleryClosed', _ => setTimeout(_ => this.closeDrawer(), this.animationTimeout))
-    bus.addListener('itemSelected', async item => {
+    global.bus.addListener('photoGalleryClosed', _ => setTimeout(_ => this.closeDrawer(), this.animationTimeout))
+    global.bus.addListener('itemSelected', async item => {
       const scrollToIndex = global.products.findIndex(d => d.id === item.id)
       this.setState({
         // restore read-point & index
@@ -126,7 +127,7 @@ export default class App extends React.Component {
       setTimeout(_ => {
         // update index and bounce bottom-drawer teaser in
         this.setState({scrollToIndex})
-        bus.emit('itemSelected', this.item())
+        global.bus.emit('itemSelected', this.item())
         Animated.spring(this.state.scale, {
           toValue: 1,
           velocity: 5,
@@ -153,11 +154,11 @@ export default class App extends React.Component {
           onMomentumScrollEnd={i => this.onScrollEnd(i)}
           onScrollBeginDrag={i => this.onScrollBegin(i)}
           showsHorizontalScrollIndicator={false}
-          progressBarThickness={0}
-          showProgressBar={false}
+          progressBarThickness={2}
+          showProgressBar={true}
           scrollToIndex={this.state.scrollToIndex}
-          progressBarBackgroundColor="rgba(0,0,0,0.25)"
-          progressBarValueBackgroundColor="#000">
+          progressBarBackgroundColor="rgba(255,255,255,0.25)"
+          progressBarValueBackgroundColor={config.accent}>
           {global.products.map((item, ndx) =>
             (
               <ParallaxSwiperPage key={item.id + 'page'}
@@ -185,14 +186,16 @@ export default class App extends React.Component {
                             },
                           ]}>
                           <TouchableWithoutFeedback onPress={_ => this.openDrawer()}>
-                            <View>
+                            <View style={{paddingHorizontal: 20}}>
                               <Attributes item={item} />
                               <Animated.View style={[{transform: [{scale: this.state.scale}]}]}>
                                 <Counter />
                               </Animated.View>
-                              <Text style={[styles.foregroundText]}>{item.title.toUpperCase()}</Text>
-                              <Text style={[styles.description]}>{item.description}</Text>
-                              <Text style={[styles.description, styles.ingredients]}>{item.ingredients}</Text>
+                              <View style={styles.textContainer}>
+                                <Text style={[styles.foregroundText]}>{item.title.toUpperCase()}</Text>
+                                <Text style={[styles.description, {flex: 1}]}>{item.description}</Text>
+                                <Text style={[styles.description, styles.ingredients]}>{item.ingredients}</Text>
+                              </View>
                             </View>
                           </TouchableWithoutFeedback>
                         </Animated.View>
@@ -208,9 +211,9 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
+  textContainer: {
+    flex: 1,
+    alignSelf: 'flex-end',
   },
   backgroundImage: {
     width,
@@ -220,21 +223,18 @@ const styles = StyleSheet.create({
   foregroundTextContainer: {
     flex: 1,
     alignItems: "flex-start",
-    justifyContent: "center",
     backgroundColor: "transparent",
     position: 'absolute',
     bottom: 0,
     paddingBottom: 25,
     paddingTop: 15,
-    paddingLeft: 25,
+    height: 370,
     left: 0,
     right: 0,
   },
   foregroundText: {
-    flex: 1,
-    flexDirection: 'row',
-    marginRight: 25,
-    fontSize: 24,
+    marginTop: 10,
+    fontSize: 27,
     lineHeight: 32,
     textAlign: 'center',
     fontWeight: "700",
@@ -242,13 +242,12 @@ const styles = StyleSheet.create({
     color: config.dark,
   },
   description: {
-    textAlign: 'center',
+    textAlign: 'justify',
     lineHeight: 20,
     fontSize: 15,
     letterSpacing: -1,
     fontWeight: '400',
-    paddingRight: 25,
-    color: config.dark,
+    color: color(config.dark).fade(.05),
   },
   ingredients: {
     fontSize: 10,
@@ -260,6 +259,9 @@ const styles = StyleSheet.create({
   attributes: {
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  attribute: {
+    height: 85,
   },
   attributeBubble: {
     backgroundColor: config.accent,
