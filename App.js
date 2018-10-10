@@ -36,7 +36,6 @@ const App = class App extends Component {
     const
       products = await getProducts,
       productImages = processImages(products)
-        .filter(p => p.node.productType === 'Meal')
         .map((p, id) => {
           const $ = cheerio.load(p.node.descriptionHtml)
           return {

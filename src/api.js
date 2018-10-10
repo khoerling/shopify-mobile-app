@@ -7,13 +7,14 @@ module.exports = {
   getProducts: request('getProducts', 'products.edges', `
     {
       shop {
-        products(first: 20) {
+        products(first: 20, reverse: true, query:"NOT tag:'Archive' AND tag:'Meal' AND product_type:'Meal'") {
           edges {
             node {
               id
               title
               descriptionHtml
               productType
+              tags
               priceRange {
                 maxVariantPrice {
                   amount
