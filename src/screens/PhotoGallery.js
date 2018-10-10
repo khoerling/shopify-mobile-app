@@ -3,7 +3,7 @@ import { Platform, Easing, Text, View, Animated } from 'react-native'
 import { Haptic } from 'expo'
 import PropTypes from 'prop-types'
 
-import Transition from '../Transition'
+import Transition from '../components/Transition'
 import Details from './Details'
 
 const isDroid = Platform.OS !== 'ios'

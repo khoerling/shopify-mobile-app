@@ -11,7 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons'
 import { Haptic } from 'expo'
 
-import config from '../config'
+import config from '../../config'
 
 const isDroid = Platform.OS !== 'ios'
 

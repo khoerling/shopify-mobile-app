@@ -21,8 +21,8 @@ export default class Intro extends React.Component {
       imagesLoaded = this.state.imagesLoaded + 1,
       isLoading = imagesLoaded <= 2
     this.setState({isLoading, imagesLoaded}, _ => {
-    if (!isLoading) this.buildIn()
-                 })
+      if (!isLoading) this.buildIn()
+    })
   }
 
   buildIn() {

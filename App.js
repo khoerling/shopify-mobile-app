@@ -4,7 +4,7 @@ import { Transition, FluidNavigator } from 'react-navigation-fluid-transitions'
 import EventEmitter from 'EventEmitter'
 import { KeepAwake } from 'expo'
 
-import GridItem from './src/GridItem'
+import GridItem from './src/components/GridItem'
 import Parallax from './src/screens/Parallax'
 import Intro from './src/screens/Intro'
 import PhotoGallery from './src/screens/PhotoGallery'

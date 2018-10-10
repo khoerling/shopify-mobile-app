@@ -3,7 +3,7 @@ import { StatusBar, Platform, PanResponder, TouchableWithoutFeedback, Animated, 
 import { ParallaxSwiper, ParallaxSwiperPage } from "react-native-parallax-swiper"
 import { Haptic } from 'expo'
 import Select from 'react-native-picker-select'
-import Counter from './../Counter'
+import Counter from './../components/Counter'
 
 import config from '../../config'
 import { get, set } from './../storage'
