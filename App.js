@@ -2,6 +2,7 @@ import React, { Component, PureComponent } from 'react'
 import { Easing, TouchableWithoutFeedback, ImageBackground, SafeAreaView, StatusBar, Platform, StyleSheet, Text, ListView, View, Dimensions } from 'react-native'
 import { Transition, FluidNavigator } from 'react-navigation-fluid-transitions'
 import EventEmitter from 'EventEmitter'
+import { KeepAwake } from 'expo'
 
 import GridItem from './src/GridItem'
 import Parallax from './src/screens/Parallax'
@@ -84,6 +85,7 @@ const App = class App extends Component {
     return (
       <Transition appear="vertical">
       <View style={styles.container}>
+        {__DEV__ ? <KeepAwake /> : null}
         <StatusBar hidden={true} />
         {this.state.dataSource
           ?
