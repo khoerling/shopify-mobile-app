@@ -32,7 +32,27 @@ module.exports = {
         }
       }
     }
-  `)
+  `),
+  checkout: lineItems => request('checkout', 'products.edges', `
+    mutation {
+      checkoutCreate(input: {
+        lineItems: ${JSON.stringify(lineItems)}
+      }) {
+        checkout {
+          id
+          webUrl
+          lineItems(first: 5) {
+            edges {
+              node {
+                title
+                quantity
+              }
+            }
+          }
+        }
+      }
+    }
+  `),
 }
 
 // ---------
@@ -57,17 +77,19 @@ async function request(key, path, body) {
         if (shop) {
           // success
           const value = get(shop, path)
-          storage.set(k, value)
+          // storage.set(k, value)
           return value
         } else {
           // error
           return json
         }
       })
-  if (data) {
-    // req() // freshen
-    return data
-  } else {
-    return req()
-  }
+      .catch(err => cw(`request error ${err}`))
+  // if (data) {
+  //   req() // freshen
+  //   return data
+  // } else {
+  //   return req()
+  // }
+  return req()
 }

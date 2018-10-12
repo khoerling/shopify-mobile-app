@@ -24,7 +24,7 @@ const
 Object.assign(global, {cw, js, bus})
 
 const
-  {getProducts} = require('./src/api'),
+  {getProducts} = require('./src/shopify'),
   cheerio = require('react-native-cheerio'),
   R = require('ramda')
 
