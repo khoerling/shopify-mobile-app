@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   counterText: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: config.white,
+    color: config.light,
     textAlign: 'center',
     paddingHorizontal: 15,
   },

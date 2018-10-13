@@ -150,7 +150,7 @@ export default class App extends React.Component {
           animatedValue={this.swipeAnimatedValue}
           dividerWidth={8}
           dividerColor={config.accent}
-          backgroundColor={config.white}
+          backgroundColor={config.light}
           onMomentumScrollEnd={i => this.onScrollEnd(i)}
           onScrollBeginDrag={i => this.onScrollBegin(i)}
           showsHorizontalScrollIndicator={false}
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     position: 'absolute',
     bottom: 0,
-    paddingBottom: 25,
+    paddingBottom: 15 + config.checkoutButtonHeight,
     paddingTop: 15,
     height: 370,
     left: 0,
@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   attributeName: {
-    color: config.white,
+    color: config.light,
     fontWeight: 'bold',
     justifyContent: 'center',
     alignItems: 'center',

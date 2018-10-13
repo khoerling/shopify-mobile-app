@@ -72,7 +72,6 @@ const App = class App extends Component {
     <View
       style={{
         flexDirection: 'row',
-        marginBottom: 2,
         justifyContent: 'space-between'
       }}>
       {row.map(item =>
@@ -83,20 +82,20 @@ const App = class App extends Component {
   render() {
     return (
       <Transition appear="vertical">
-      <View style={styles.container}>
-        {__DEV__ ? <KeepAwake /> : null}
-        <StatusBar hidden={true} />
-        {this.state.dataSource
-          ?
-            <PhotoGallery
-              renderContent={({ onPhotoOpen }) =>
-                <ListView
-                  dataSource={this.state.dataSource}
-                  renderRow={this.renderRow.bind(this, onPhotoOpen)}
-                />}
-            />
-          : null}
-      </View>
+        <View style={styles.container}>
+          {__DEV__ ? <KeepAwake /> : null}
+          <StatusBar hidden={true} />
+          {this.state.dataSource
+            ?
+              <PhotoGallery
+                renderContent={({ onPhotoOpen }) =>
+                  <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={this.renderRow.bind(this, onPhotoOpen)}
+                  />}
+              />
+            : null}
+        </View>
       </Transition>
     )
   }
@@ -120,24 +119,8 @@ export default Navigator
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: config.white,
+    backgroundColor: config.light,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  ribbon: {
-    top: 0,
-    position: 'absolute',
-    width: width,
-  },
-  fillUp: {
-    fontWeight: 'bold',
-    fontSize: 30,
-    textAlign: 'center',
-    color: config.accent,
-  },
-  img: {
-    ...StyleSheet.absoluteFillObject,
-    flex: 1,
-    width,
   },
 })

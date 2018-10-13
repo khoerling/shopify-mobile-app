@@ -1,8 +1,9 @@
 import React from 'react'
-import { Platform, Easing, Text, View, Animated } from 'react-native'
+import { Platform, Easing, Text, View, Animated, TouchableWithoutFeedback, StyleSheet } from 'react-native'
 import { Haptic } from 'expo'
 import PropTypes from 'prop-types'
 
+import config from '../../config'
 import Transition from '../components/Transition'
 import Details from './Details'
 
@@ -88,8 +89,8 @@ export default PhotoGallery = class PhotoGallery extends React.Component {
       bus.emit('photoGalleryClosed', photoId)
       Animated.timing(this.state.openProgress, {
         toValue: 0,
-        duration: 400,
-        easing: Easing.inOut(Easing.cubic),
+        duration: 375,
+        easing: Easing.easeOutCubic,
         useNativeDriver: true
       }).start(() => {
         this._imageOpacitySetters[photoId](1)
@@ -101,7 +102,7 @@ export default PhotoGallery = class PhotoGallery extends React.Component {
   render() {
     const { photo, openProgress, isAnimating } = this.state
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, marginBottom: config.checkoutButtonHeight }}>
         {this.props.renderContent({ onPhotoOpen: this.open })}
         <Transition
           openProgress={openProgress}
@@ -115,7 +116,30 @@ export default PhotoGallery = class PhotoGallery extends React.Component {
           openProgress={openProgress}
           isAnimating={isAnimating}
         />
+        <TouchableWithoutFeedback onPress={this.checkout}>
+          <View style={styles.checkoutButton}>
+            <Text style={styles.checkoutText}>Checkout</Text>
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  checkoutButton: {
+    backgroundColor: config.accent,
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    bottom: -(config.checkoutButtonHeight),
+    height: config.checkoutButtonHeight,
+    left: 0,
+    right: 0,
+  },
+  checkoutText: {
+    ...config.bold,
+    color: config.light,
+    marginTop: -20,
+  },
+})

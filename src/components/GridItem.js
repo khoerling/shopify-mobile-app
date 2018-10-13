@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     ...config.styles.h1,
     letterSpacing: -1,
     marginBottom: 0,
-    color: config.white,
+    color: config.dark,
     fontSize: 14,
     textAlign: 'center',
     position: 'absolute',

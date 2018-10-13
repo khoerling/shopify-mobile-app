@@ -2,7 +2,7 @@ const
   {em}          = require('./src/responsive'),
   color         = require('color'),
   dark          = color('#221E1F'),
-  white         = '#fff',
+  light         = '#fff',
   grey          = '#EBEBEB',
   accent        = '#f0888a',
   muted         = '#774345'
@@ -11,13 +11,14 @@ const
 module.exports = {
   title: 'Don\'t Be a Pig',
   demoUser: {email: 'demo@wineamp.com', password: 'demo'},
+  checkoutButtonHeight: 75,
 
   // users
   usersStartLoggedIn: false,
 
   // colors & style
-  accent:        accent,
-  white:         white,
+  accent,
+  light,
   dark,
   grey,
   muted,

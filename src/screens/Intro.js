@@ -72,14 +72,14 @@ export default class Intro extends React.Component {
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: config.white,
+    backgroundColor: config.light,
   },
   chooser: {
     flex: 1,
     marginVertical: 25,
     marginHorizontal: 15,
     borderWidth: 2,
-    borderColor: config.white,
+    borderColor: config.light,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     textAlign: 'center',
     letterSpacing: 2,
-    color: config.white,
+    color: config.light,
   },
   img: {
     flex: 1,

@@ -7,16 +7,24 @@ import {
   ListView,
   Dimensions,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   Animated
 } from 'react-native'
 import Parallax from './Parallax'
+import config from '../../config'
 
-const maxWidth = Dimensions.get('window').width
+const
+  maxWidth = Dimensions.get('window').width,
+  {checkout} = require('../shopify')
 
 export default class Details extends React.Component {
   state = {
     localPhoto: null,
     scrollToIndex: 0,
+  }
+
+  checkout = e => {
+    checkout()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -104,19 +112,21 @@ const styles = StyleSheet.create({
     color: '#333',
     fontSize: 14
   },
-  body: { flex: 1, },
+  body: {
+    flex: 1,
+  },
   closeText: { fontSize: 17, fontWeight: 'bold', color: '#eee', backgroundColor: 'transparent' },
   closeButton: {
     backgroundColor: 'rgba(0,0,0,0.4)',
     marginTop: 22,
     marginRight: 3,
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: config.light,
     padding: 10,
     paddingTop: 5,
     paddingBottom: 5,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: 'rgba(255,255,255,.7)',
     borderRadius: 100
-  }
+  },
 })
