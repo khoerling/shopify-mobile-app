@@ -15,6 +15,16 @@ module.exports = {
               descriptionHtml
               productType
               tags
+              variants(first: 10) {
+                edges {
+                  node {
+                    id
+                    title
+                    price
+                    displayName
+                  }
+                }
+              }
               priceRange {
                 maxVariantPrice {
                   amount
