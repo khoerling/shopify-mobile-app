@@ -13,6 +13,7 @@ import { processImages, buildRows, normalizeRows } from './src/utils'
 global.config = require('./config')
 
 const
+  storage = require('./src/storage'),
   { width, height } = Dimensions.get("window"),
   js = JSON.stringify,
   cw = (...args) => console.warn(args),
@@ -21,7 +22,7 @@ const
   isDroid = Platform.OS !== 'ios',
   color = require('color')
 
-Object.assign(global, {cw, js, bus})
+Object.assign(global, {cw, js, bus, storage})
 
 const
   {getProducts} = require('./src/shopify'),
