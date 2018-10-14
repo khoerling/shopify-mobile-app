@@ -7,7 +7,9 @@ import config from '../../config'
 import Transition from '../components/Transition'
 import Details from './Details'
 
-const isDroid = Platform.OS !== 'ios'
+const
+  isDroid = Platform.OS !== 'ios',
+  shopify = require('../shopify')
 
 class PhotoGalleryPhoto extends React.Component {
   state = {
@@ -77,10 +79,30 @@ export default PhotoGallery = class PhotoGallery extends React.Component {
     this._imageOpacitySetters[photo.id] = setOpacity
   }
 
+  checkout = _ => {
+    shopify.checkout()
+  }
+
   open = photo => {
     if (!isDroid) Haptic.selection()
+    this._imageOpacitySetters[photo.id](
+      this.state.openProgress.interpolate({
+        inputRange: [0.005, 0.999],
+        outputRange: [1, 0]
+      })
+    )
     this.setState({ photo, isAnimating: false })
-    this.state.openProgress.setValue(1) // immediately open
+    // this.state.openProgress.setValue(1) // immediately open
+    setTimeout(_ => {
+      Animated.timing(this.state.openProgress, {
+        toValue: 1,
+        duration: 150,
+        easing: Easing.easeInCubic,
+        useNativeDriver: true
+      }).start(() => {
+        this.setState({ isAnimating: false })
+      })
+    }, 50) // FIXME yield to load photo -- use cb, or... ?
     bus.emit('itemSelected', photo) // photo is the full item
   }
 
@@ -118,7 +140,7 @@ export default PhotoGallery = class PhotoGallery extends React.Component {
         />
         <TouchableWithoutFeedback onPress={this.checkout}>
           <View style={styles.checkoutButton}>
-            <Text style={styles.checkoutText}>Checkout</Text>
+            <Text style={styles.checkoutText}>CHECKOUT</Text>
           </View>
         </TouchableWithoutFeedback>
       </View>
@@ -139,6 +161,7 @@ const styles = StyleSheet.create({
   },
   checkoutText: {
     ...config.bold,
+    fontSize: 20,
     color: config.light,
     marginTop: -20,
   },

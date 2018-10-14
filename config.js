@@ -52,7 +52,7 @@ module.exports = {
     },
     bold: {
       color: dark,
-      fontWeight: '200',
+      fontWeight: 'bold',
       fontSize: em(1.65),
       backgroundColor: 'transparent',
     },

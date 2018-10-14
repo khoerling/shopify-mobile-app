@@ -11,7 +11,8 @@ import { get, set } from './../storage'
 const
   color = require('color'),
   { width, height } = Dimensions.get("window"),
-  isDroid = Platform.OS !== 'ios'
+  isDroid = Platform.OS !== 'ios',
+  dividerWidth = 1
 
 const Attributes = ({item}) =>
   <View style={styles.attributes}>
@@ -42,9 +43,9 @@ export default class App extends React.Component {
       {
         scale: this.swipeAnimatedValue.interpolate({
           inputRange: [
-            (index - 1) * (width + 8), // Add 8 for dividerWidth
-            index * (width + 8),
-            (index + 1) * (width + 8)
+            (index - 1) * (width + dividerWidth), // Add dividerWidth
+            index * (width + dividerWidth),
+            (index + 1) * (width + dividerWidth)
           ],
           outputRange: [-.8, 1, -.8],
           extrapolate: "clamp"
@@ -53,9 +54,9 @@ export default class App extends React.Component {
       {
         rotate: this.swipeAnimatedValue.interpolate({
           inputRange: [
-            (index - 1) * (width + 8),
-            index * (width + 8),
-            (index + 1) * (width + 8)
+            (index - 1) * (width + dividerWidth),
+            index * (width + dividerWidth),
+            (index + 1) * (width + dividerWidth)
           ],
           outputRange: ["80deg", "0deg", "-80deg"],
           extrapolate: "clamp"
@@ -148,7 +149,7 @@ export default class App extends React.Component {
         <ParallaxSwiper
           speed={0.2}
           animatedValue={this.swipeAnimatedValue}
-          dividerWidth={8}
+          dividerWidth={dividerWidth}
           dividerColor={config.accent}
           backgroundColor={config.light}
           onMomentumScrollEnd={i => this.onScrollEnd(i)}
@@ -193,7 +194,7 @@ export default class App extends React.Component {
                               </Animated.View>
                               <View style={styles.textContainer}>
                                 <Text style={[styles.foregroundText]}>{item.title.toUpperCase()}</Text>
-                                <Text style={[styles.description, {flex: 1}]}>{item.description}</Text>
+                                {0 && <Text style={[styles.description, {flex: 1}]}>{item.description}</Text>}
                                 <Text style={[styles.description, styles.ingredients]}>{item.ingredients}</Text>
                               </View>
                             </View>
@@ -228,15 +229,15 @@ const styles = StyleSheet.create({
     bottom: 0,
     paddingBottom: 15 + config.checkoutButtonHeight,
     paddingTop: 15,
-    height: 370,
+    height: 400,
     left: 0,
     right: 0,
   },
   foregroundText: {
     marginTop: 10,
-    fontSize: 27,
+    fontSize: 25,
     lineHeight: 32,
-    textAlign: 'center',
+    textAlign: 'justify',
     fontWeight: "700",
     letterSpacing: 0.41,
     color: config.dark,
@@ -247,14 +248,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     letterSpacing: -1,
     fontWeight: '400',
-    color: color(config.dark).fade(.05),
+    color: color(config.dark).fade(.3),
   },
   ingredients: {
+    textAlign: 'justify',
     fontSize: 10,
     lineHeight: 12,
     fontWeight: 'bold',
     paddingTop: 5,
-    color: config.accent,
+    color: color(config.dark).fade(.5),
   },
   attributes: {
     flexDirection: 'row',
@@ -264,19 +266,19 @@ const styles = StyleSheet.create({
     height: 85,
   },
   attributeBubble: {
-    backgroundColor: config.accent,
+    backgroundColor: color(config.light).fade(.5),
     borderRadius: 100,
     margin: 5,
     padding: 12,
   },
   attributeName: {
-    color: config.light,
+    color: config.dark,
     fontWeight: 'bold',
     justifyContent: 'center',
     alignItems: 'center',
   },
   attributeValue: {
-    color: config.accent,
+    color: color(config.dark).fade(.35),
     fontWeight: 'bold',
     letterSpacing: -1,
     flex: 1,
