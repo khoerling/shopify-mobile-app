@@ -84,5 +84,5 @@ function count(cart) { // sum of items + qty
 
 function total(cart) {
   return cart.reduce(
-    (acc, i) => acc + (i.price * (i.qty || 1)), 0)
+    (acc, i) => acc + ((i.price || 0) * (i.qty || 1)), 0)
 }

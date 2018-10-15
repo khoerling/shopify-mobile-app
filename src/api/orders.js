@@ -42,7 +42,7 @@ async function get() {
 }
 
 async function save(orders) {
-  bus.emit('orders', orders)                                  // broadcast
+  bus.emit('orders', orders)                               // broadcast
   setTimeout(async _ => await storage.set(key, orders), 1250) // defer writes
   return orders
 }
