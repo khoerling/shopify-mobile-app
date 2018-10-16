@@ -2,13 +2,13 @@ import React from 'react'
 import { StatusBar, Platform, PanResponder, TouchableWithoutFeedback, Animated, StyleSheet, Image, Text, View, Dimensions } from 'react-native'
 import { ParallaxSwiper, ParallaxSwiperPage } from "react-native-parallax-swiper"
 import { Haptic } from 'expo'
-import Select from 'react-native-picker-select'
 import Counter from './../components/Counter'
 
 import config from '../../config'
 import { get, set } from './../storage'
 
 const
+  cart = require('../api/cart'),
   color = require('color'),
   { width, height } = Dimensions.get("window"),
   isDroid = Platform.OS !== 'ios',
@@ -143,6 +143,11 @@ export default class App extends React.Component {
     }
   }
 
+  counterPressed(product, count) {
+    product.qty = count
+    cart.upsertItem(product)
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -190,7 +195,7 @@ export default class App extends React.Component {
                             <View style={{paddingHorizontal: 20}}>
                               <Attributes item={item} />
                               <Animated.View style={[{transform: [{scale: this.state.scale}]}]}>
-                                <Counter />
+                                <Counter counter={item.qty} onPress={c => this.counterPressed(item, c)} />
                               </Animated.View>
                               <View style={styles.textContainer}>
                                 <Text style={[styles.foregroundText]}>{item.title.toUpperCase()}</Text>

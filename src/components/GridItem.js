@@ -1,6 +1,6 @@
 import React from 'react'
 import { Animated, Easing, StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native'
-import PhotoGallery from './../screens/PhotoGallery'
+import PhotoGallery from './PhotoGallery'
 import { LinearGradient } from 'expo'
 import config from '../../config'
 

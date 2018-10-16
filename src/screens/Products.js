@@ -3,7 +3,7 @@ import { Platform, StyleSheet, Text, ListView, View, Dimensions } from 'react-na
 import { Transition } from 'react-navigation-fluid-transitions'
 
 import GridItem from '../components/GridItem'
-import PhotoGallery from './PhotoGallery'
+import PhotoGallery from '../components/PhotoGallery'
 import { processImages, buildRows, normalizeRows } from '../../src/utils'
 
 const

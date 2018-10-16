@@ -10,7 +10,7 @@ import {
   TouchableWithoutFeedback,
   Animated
 } from 'react-native'
-import Parallax from './Parallax'
+import Parallax from '../components/Parallax'
 import config from '../../config'
 
 const

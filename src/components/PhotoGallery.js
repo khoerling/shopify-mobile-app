@@ -5,9 +5,10 @@ import PropTypes from 'prop-types'
 
 import config from '../../config'
 import Transition from '../components/Transition'
-import Details from './Details'
+import Details from '../screens/Details'
 
 const
+  cart = require('../api/cart'),
   isDroid = Platform.OS !== 'ios',
   shopify = require('../shopify')
 
@@ -79,8 +80,9 @@ export default PhotoGallery = class PhotoGallery extends React.Component {
     this._imageOpacitySetters[photo.id] = setOpacity
   }
 
-  checkout = _ => {
-    shopify.checkout()
+  checkout = async _ => {
+    this.props.navigation.navigate('cart')
+    // shopify.checkout()
   }
 
   open = photo => {
