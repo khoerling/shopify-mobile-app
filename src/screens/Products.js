@@ -41,16 +41,16 @@ const Products = class Products extends Component {
             }
           }
         })
-    storage.set('products', productImages)
+
+    // freshen products
     global.products = productImages
+    storage.set('products', productImages)
 
-    let rows = buildRows(productImages, width)
-    rows = normalizeRows(rows, width)
-
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    })
-
+    const
+      rows = normalizeRows(buildRows(productImages, width), width),
+      ds = new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2
+      })
     this.setState({dataSource: ds.cloneWithRows(rows)})
   }
 
