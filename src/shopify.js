@@ -21,7 +21,6 @@ module.exports = {
                     id
                     title
                     price
-                    displayName
                   }
                 }
               }
@@ -43,7 +42,8 @@ module.exports = {
       }
     }
   `),
-  checkout: lineItems => request('checkout', 'products.edges', `
+
+  checkout: lineItems => request('checkout', '', `
     mutation {
       checkoutCreate(input: {
         lineItems: ${JSON.stringify(lineItems)}
@@ -72,11 +72,11 @@ async function request(key, path, body) {
     data = await storage.get(k),
     req = _ =>
       // kick-off fresh query
-      fetch('https://dont-be-a-pig.myshopify.com/admin/api/graphql.json', {
+      fetch('https://dont-be-a-pig.myshopify.com/api/graphql', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/graphql',
-          'Authorization': 'Basic ZjlkMjk1YmE5OTI2YzMyMDYwNDM3MjY0Y2YyMmZiMTg6NDJhZWZmN2I0MDBjMjQyYzQyYTQ3ZWU1MGM4ODY4MDA='
+          'X-Shopify-Storefront-Access-Token': '3c29bc34521cc79fa99cbb7e83ace6b6',
         }),
         body
       })
