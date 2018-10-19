@@ -178,7 +178,7 @@ export default class App extends React.Component {
                 ForegroundComponent={
                   <View key={item.id} style={[styles.foregroundTextContainer, {opacity: this.state.isDrawerOpen ? 0 : 1}]}>
                     {this.state.isDrawerOpen
-                      ? null
+                      ? <View />
                       : <Animated.View
                           style={[
                             this.getPageTransformStyle(ndx),
@@ -201,7 +201,7 @@ export default class App extends React.Component {
                               </Animated.View>
                               <View style={styles.textContainer}>
                                 <Text style={[styles.foregroundText]}>{item.title.toUpperCase()}</Text>
-                                {0 && <Text style={[styles.description, {flex: 1}]}>{item.description}</Text>}
+                                {0 && <Text style={[styles.description, {flex: 1}]}>{item.description}</Text> || <View />}
                                 <Text style={[styles.description, styles.ingredients]}>{item.ingredients}</Text>
                               </View>
                             </View>
