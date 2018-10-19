@@ -31,6 +31,7 @@ export default class Counter extends React.Component {
         easing: Easing.elastic(1.1),
         duration: 200
       }).start(() => this.setState({isOpen: 1}))
+      if (this.props.onPress) this.props.onPress(this.state.counter)
     } else {
       this.increaseCount()
     }
