@@ -17,13 +17,15 @@ const
 const Attributes = ({item}) =>
   <View style={styles.attributes}>
     {item.attributes.map(a => {
-      if (!a) return null // guard
+      if (!a) return <View /> // guard
       const [name, value] = a.split(' ')
       return <View key={a} style={styles.attribute}>
         <View style={styles.attributeBubble}>
           <Text style={styles.attributeName}>{name}</Text>
         </View>
-        <View style={styles.attributeValue}><Text>{value}</Text></View>
+        <View style={styles.attributeValue}>
+          <Text>{value}</Text>
+        </View>
       </View>
     })}
   </View>
