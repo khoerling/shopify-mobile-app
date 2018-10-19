@@ -45,7 +45,7 @@ module.exports = class Button extends PureComponent {
                   onPress={_ => {
                     if (this.props.onPress) this.props.onPress()
                   }} />
-              : <Text />}
+              : <View />}
           </View>
         </TouchableOpacity>
     )

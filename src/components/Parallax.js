@@ -23,7 +23,7 @@ const Attributes = ({item}) =>
         <View style={styles.attributeBubble}>
           <Text style={styles.attributeName}>{name}</Text>
         </View>
-        <Text style={styles.attributeValue}>{value}</Text>
+        <View style={styles.attributeValue}>{value}</View>
       </View>
     })}
   </View>
