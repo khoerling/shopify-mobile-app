@@ -81,8 +81,12 @@ export default PhotoGallery = class PhotoGallery extends React.Component {
   }
 
   checkout = async _ => {
-    this.props.navigation.navigate('cart')
-    // shopify.checkout()
+    // this.props.navigation.navigate('cart')
+    const variants = global.products
+      .filter(p => p.qty > 0)
+      .map(p => { return {variantId: p.variants[0], quantity: p.qty} })
+    if (variants.length) // guard from no items
+      shopify.checkout(variants)
   }
 
   open = photo => {

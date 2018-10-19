@@ -83,8 +83,8 @@ async function request(key, path, body) {
       // stash
       .then(res => res.json())
       .then(json => {
-        const shop = json.data.shop
-        if (shop) {
+        if (json.data && json.data.shop) {
+          const shop = json.data.shop
           // success
           const value = get(shop, path)
           // storage.set(k, value)

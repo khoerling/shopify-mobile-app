@@ -38,7 +38,8 @@ const Products = class Products extends Component {
             source: {
               uri: p.node.images.edges[0].node.transformedSrc,
               cache: 'force-cache'
-            }
+            },
+            variants: p.node.variants.edges.map(v => v.node.id),
           }
         })
 
